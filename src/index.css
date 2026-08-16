@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-steel: var(--steel);
+  --color-line: var(--line);
+  --color-card: var(--card);
+  --color-danger: var(--danger);
+  --color-ok: var(--ok);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --shadow-lift: var(--shadow-lift);
+}
+
+:root,
+.light {
+  color-scheme: light;
+  --bg: #ffffff;
+  --fg: #0a0a0a;
+  --muted: #525252;
+  --accent: #0a0a0a;
+  --accent-fg: #ffffff;
+  --steel: #404040;
+  --line: #e5e5e5;
+  --card: #ffffff;
+  --danger: #b91c1c;
+  --ok: #166534;
+  --grid: rgb(10 10 10 / 0.06);
+  --glow: rgb(10 10 10 / 0.04);
+  --shadow-lift: 0 24px 60px rgb(10 10 10 / 0.08);
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: #050505;
+  --fg: #ffffff;
+  --muted: #a3a3a3;
+  --accent: #ffffff;
+  --accent-fg: #050505;
+  --steel: #d4d4d4;
+  --line: #1f1f1f;
+  --card: #0a0a0a;
+  --danger: #f87171;
+  --ok: #4ade80;
+  --grid: rgb(255 255 255 / 0.05);
+  --glow: rgb(255 255 255 / 0.06);
+  --shadow-lift: 0 24px 80px rgb(0 0 0 / 0.55);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

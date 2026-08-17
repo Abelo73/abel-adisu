@@ -1,5 +1,6 @@
 import { labItems } from '@/content/lab'
 import { Container, PageIntro } from '@/components/ui/Container'
+import { GlassCard } from '@/components/ui/Reveal'
 
 export function LabPage() {
   return (
@@ -11,17 +12,19 @@ export function LabPage() {
       />
       <ul className="grid gap-4 md:grid-cols-2">
         {labItems.map((item) => (
-          <li key={item.slug} className="rounded-[12px] border border-dashed border-line p-5">
-            <p className="font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-steel">{item.status}</p>
-            <h2 className="mt-2 font-display text-2xl">{item.title}</h2>
-            <p className="mt-3 text-sm text-muted">{item.summary}</p>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {item.stack.map((tech) => (
-                <li key={tech} className="rounded-full border border-line px-3 py-1 text-xs">
-                  {tech}
-                </li>
-              ))}
-            </ul>
+          <li key={item.slug}>
+            <GlassCard className="border-dashed p-5">
+              <p className="text-xs uppercase tracking-[0.16em] text-steel">{item.status}</p>
+              <h2 className="mt-2 text-2xl font-semibold tracking-tight">{item.title}</h2>
+              <p className="mt-3 text-sm text-muted">{item.summary}</p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {item.stack.map((tech) => (
+                  <li key={tech} className="rounded-full border border-line px-3 py-1 text-xs">
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+            </GlassCard>
           </li>
         ))}
       </ul>

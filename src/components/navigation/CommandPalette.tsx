@@ -37,7 +37,7 @@ export function CommandPalette({
         role="dialog"
         aria-modal="true"
         aria-labelledby="command-title"
-        className="relative w-full max-w-lg overflow-hidden rounded-[12px] border border-line bg-card shadow-[var(--shadow-lift)]"
+        className="relative w-full max-w-lg overflow-hidden rounded-[24px] border border-line bg-card shadow-[var(--shadow-lift)] backdrop-blur-xl"
       >
         <h2 id="command-title" className="sr-only">
           Command palette
@@ -60,7 +60,7 @@ export function CommandPalette({
                   to={item.to}
                   onClick={onClose}
                   className={cn(
-                    'flex min-h-12 items-center rounded-[8px] px-3 text-sm hover:bg-fg/5',
+                    'flex min-h-12 items-center rounded-full px-3 text-sm hover:bg-fg/5',
                   )}
                 >
                   {item.label}

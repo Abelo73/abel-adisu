@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button'
 import { Container, PageIntro } from '@/components/ui/Container'
 import { contactSchema } from '@/lib/contactSchema'
 import { submitContact } from '@/lib/contactService'
-import { isConfiguredEmail, isConfiguredUrl } from '@/lib/links'
+import { isConfiguredEmail, isConfiguredUrl, newTab } from '@/lib/links'
 
 const intents = [
   'Build a backend system',
@@ -72,7 +72,7 @@ export function ContactPage() {
             <select
               id="projectType"
               name="projectType"
-              className="mt-2 min-h-12 w-full rounded-[8px] border border-line bg-bg px-3"
+              className="mt-2 min-h-12 w-full rounded-full border border-line bg-card px-4"
               defaultValue=""
             >
               <option value="" disabled>
@@ -94,7 +94,7 @@ export function ContactPage() {
               id="message"
               name="message"
               rows={6}
-              className="mt-2 w-full rounded-[8px] border border-line bg-bg px-3 py-3"
+              className="mt-2 w-full rounded-[24px] border border-line bg-card px-4 py-3"
             />
             {errors.message ? <p className="mt-1 text-sm text-danger">{errors.message}</p> : null}
           </div>
@@ -113,7 +113,7 @@ export function ContactPage() {
           ) : null}
         </form>
         <aside>
-          <h2 className="font-display text-2xl">Other channels</h2>
+          <h2 className="text-2xl font-semibold tracking-tight">Other channels</h2>
           <ul className="mt-4 space-y-3 text-sm">
             <li>
               Email:{' '}
@@ -128,7 +128,7 @@ export function ContactPage() {
             <li>
               GitHub:{' '}
               {isConfiguredUrl(profile.social.github) ? (
-                <a className="underline" href={profile.social.github}>
+                <a className="underline" href={profile.social.github} {...newTab}>
                   Profile
                 </a>
               ) : (
@@ -138,7 +138,7 @@ export function ContactPage() {
             <li>
               LinkedIn:{' '}
               {isConfiguredUrl(profile.social.linkedin) ? (
-                <a className="underline" href={profile.social.linkedin}>
+                <a className="underline" href={profile.social.linkedin} {...newTab}>
                   Profile
                 </a>
               ) : (
@@ -148,7 +148,7 @@ export function ContactPage() {
             <li>
               Upwork:{' '}
               {isConfiguredUrl(profile.social.upwork) ? (
-                <a className="underline" href={profile.social.upwork}>
+                <a className="underline" href={profile.social.upwork} {...newTab}>
                   Profile
                 </a>
               ) : (
@@ -191,7 +191,7 @@ function Field({
         name={name}
         type={type}
         autoComplete={autoComplete}
-        className="mt-2 min-h-12 w-full rounded-[8px] border border-line bg-bg px-3"
+        className="mt-2 min-h-12 w-full rounded-full border border-line bg-card px-4"
       />
       {error ? <p className="mt-1 text-sm text-danger">{error}</p> : null}
     </div>

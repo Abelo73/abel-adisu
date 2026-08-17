@@ -3,8 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   --color-bg: var(--bg);
@@ -17,45 +17,44 @@
   --color-card: var(--card);
   --color-danger: var(--danger);
   --color-ok: var(--ok);
+  --color-glow: var(--glow-color);
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
+  --radius-sm: 999px;
+  --radius-md: 24px;
   --shadow-lift: var(--shadow-lift);
 }
 
 :root,
 .light {
   color-scheme: light;
-  --bg: #ffffff;
-  --fg: #0a0a0a;
-  --muted: #525252;
-  --accent: #0a0a0a;
+  --bg: #f4f1fb;
+  --fg: #140c22;
+  --muted: #5c5470;
+  --accent: #6d4aff;
   --accent-fg: #ffffff;
-  --steel: #404040;
-  --line: #e5e5e5;
-  --card: #ffffff;
+  --steel: #7b61ff;
+  --line: rgb(20 12 34 / 0.12);
+  --card: rgb(255 255 255 / 0.72);
   --danger: #b91c1c;
   --ok: #166534;
-  --grid: rgb(10 10 10 / 0.06);
-  --glow: rgb(10 10 10 / 0.04);
-  --shadow-lift: 0 24px 60px rgb(10 10 10 / 0.08);
+  --glow-color: #9f7fdb;
+  --shadow-lift: 0 30px 80px rgb(92 59 168 / 0.18);
 }
 
 .dark {
   color-scheme: dark;
-  --bg: #050505;
+  --bg: #07060f;
   --fg: #ffffff;
-  --muted: #a3a3a3;
-  --accent: #ffffff;
-  --accent-fg: #050505;
-  --steel: #d4d4d4;
-  --line: #1f1f1f;
-  --card: #0a0a0a;
+  --muted: #b8b0cc;
+  --accent: #8b6cff;
+  --accent-fg: #ffffff;
+  --steel: #c4b5fd;
+  --line: rgb(255 255 255 / 0.1);
+  --card: rgb(255 255 255 / 0.05);
   --danger: #f87171;
   --ok: #4ade80;
-  --grid: rgb(255 255 255 / 0.05);
-  --glow: rgb(255 255 255 / 0.06);
-  --shadow-lift: 0 24px 80px rgb(0 0 0 / 0.55);
+  --glow-color: #7b61ff;
+  --shadow-lift: 0 40px 120px rgb(92 59 168 / 0.35);
 }
 
 html,
@@ -72,24 +71,88 @@ body {
   font-size: 1.0625rem;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: var(--fg);
-  color: var(--bg);
+  background: color-mix(in srgb, var(--accent) 55%, transparent);
+  color: #fff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--fg);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-.bg-grid {
-  background-image:
-    linear-gradient(to right, var(--grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
-  background-size: 64px 64px;
+.atmosphere {
+  background:
+    radial-gradient(900px 520px at 18% -8%, rgb(123 97 255 / 0.38), transparent 58%),
+    radial-gradient(720px 480px at 92% 12%, rgb(133 40 72 / 0.28), transparent 55%),
+    radial-gradient(640px 400px at 50% 110%, rgb(159 127 219 / 0.18), transparent 50%),
+    var(--bg);
+}
+
+.light .atmosphere {
+  background:
+    radial-gradient(900px 520px at 18% -8%, rgb(123 97 255 / 0.18), transparent 58%),
+    radial-gradient(720px 480px at 92% 12%, rgb(232 145 174 / 0.2), transparent 55%),
+    radial-gradient(640px 400px at 50% 110%, rgb(159 127 219 / 0.14), transparent 50%),
+    var(--bg);
+}
+
+.glass {
+  background: var(--card);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(22px);
+  box-shadow: var(--shadow-lift);
+}
+
+.watermark {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  color: rgb(255 255 255 / 0.06);
+  user-select: none;
+}
+
+.dark .watermark {
+  color: rgb(255 255 255 / 0.055);
+}
+
+.light .watermark {
+  color: rgb(20 12 34 / 0.06);
+}
+
+.speech-bubble {
+  position: relative;
+  border-radius: 22px;
+  padding: 1rem 1.15rem;
+  color: var(--fg);
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(135deg, #9f7fdb, #7b61ff 45%, #5eead4) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 0 28px rgb(123 97 255 / 0.18);
+}
+
+.story-gradient {
+  background: linear-gradient(90deg, #c4b5fd, #7b61ff 40%, #5eead4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes float-card {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+.float-enabled .float-card {
+  animation: float-card 5.5s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

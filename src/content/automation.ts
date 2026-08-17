@@ -1,7 +1,21 @@
+export type N8nKind =
+  | 'trigger'
+  | 'n8n'
+  | 'ai'
+  | 'if'
+  | 'http'
+  | 'database'
+  | 'notify'
+  | 'review'
+  | 'code'
+  | 'crm'
+  | 'form'
+
 export type WorkflowStep = {
   id: string
   label: string
   detail: string
+  kind: N8nKind
 }
 
 export type AutomationPlay = {
@@ -31,13 +45,13 @@ export const automationCapabilities = [
 ] as const
 
 export const coreWorkflow: WorkflowStep[] = [
-  { id: 'trigger', label: 'Trigger', detail: 'Webhook, schedule, form, or queue.' },
-  { id: 'n8n', label: 'n8n', detail: 'Orchestration, credentials, retries.' },
-  { id: 'model', label: 'AI model', detail: 'Structured output against a schema.' },
-  { id: 'decision', label: 'Decision', detail: 'Rules plus human review when it leaves the building.' },
-  { id: 'api', label: 'API', detail: 'CRM, CMS, internal Spring services.' },
-  { id: 'db', label: 'Database', detail: 'Durable record, not a Slack message.' },
-  { id: 'notify', label: 'Notification', detail: 'Email, Slack, or in-app — with a link back.' },
+  { id: 'trigger', label: 'Webhook', detail: 'Webhook, schedule, form, or queue starts the run.', kind: 'trigger' },
+  { id: 'n8n', label: 'n8n', detail: 'Orchestration, credentials, retries, and replay.', kind: 'n8n' },
+  { id: 'model', label: 'OpenAI', detail: 'Structured output against a schema — no free-form fiction.', kind: 'ai' },
+  { id: 'decision', label: 'IF', detail: 'Rules plus a human gate when the work leaves the building.', kind: 'if' },
+  { id: 'api', label: 'HTTP Request', detail: 'CRM, CMS, or internal Spring services.', kind: 'http' },
+  { id: 'db', label: 'Postgres', detail: 'Durable record, not a Slack message.', kind: 'database' },
+  { id: 'notify', label: 'Slack', detail: 'Email, Slack, or in-app — with a link back to the record.', kind: 'notify' },
 ]
 
 export const automationPlays: AutomationPlay[] = [
@@ -46,12 +60,12 @@ export const automationPlays: AutomationPlay[] = [
     title: 'AI content automation',
     summary: 'Topic in, reviewed publishable artifact out. The model never posts unsupervised.',
     steps: [
-      { id: 'in', label: 'Input', detail: 'Topic, URL, or industry brief.' },
-      { id: 'research', label: 'Research', detail: 'Fetch and extract sources.' },
-      { id: 'ai', label: 'AI processing', detail: 'Draft against a schema.' },
-      { id: 'gen', label: 'Generation', detail: 'Article, outline, or social pack.' },
-      { id: 'review', label: 'Human review', detail: 'Edit gate before anything public.' },
-      { id: 'pub', label: 'Publishing', detail: 'CMS or scheduled channels.' },
+      { id: 'in', label: 'Form Trigger', detail: 'Topic, URL, or industry brief.', kind: 'form' },
+      { id: 'research', label: 'HTTP Request', detail: 'Fetch and extract sources.', kind: 'http' },
+      { id: 'ai', label: 'OpenAI', detail: 'Draft against a schema.', kind: 'ai' },
+      { id: 'gen', label: 'Code', detail: 'Article, outline, or social pack.', kind: 'code' },
+      { id: 'review', label: 'Wait', detail: 'Edit gate before anything public.', kind: 'review' },
+      { id: 'pub', label: 'HTTP Request', detail: 'CMS or scheduled channels.', kind: 'http' },
     ],
   },
   {
@@ -59,11 +73,11 @@ export const automationPlays: AutomationPlay[] = [
     title: 'Lead automation',
     summary: 'Inbound form to a CRM record and a qualified alert — AI classifies, humans reply.',
     steps: [
-      { id: 'form', label: 'Website form', detail: 'Signed webhook.' },
-      { id: 'crm', label: 'CRM', detail: 'Create or merge the person.' },
-      { id: 'qual', label: 'AI qualification', detail: 'Score + summary, no invented facts.' },
-      { id: 'email', label: 'Email', detail: 'Optional draft, not auto-send.' },
-      { id: 'slack', label: 'Slack', detail: 'Notify with the CRM link.' },
+      { id: 'form', label: 'Webhook', detail: 'Signed inbound form payload.', kind: 'trigger' },
+      { id: 'crm', label: 'CRM', detail: 'Create or merge the person.', kind: 'crm' },
+      { id: 'qual', label: 'OpenAI', detail: 'Score + summary, no invented facts.', kind: 'ai' },
+      { id: 'email', label: 'Gmail', detail: 'Optional draft, not auto-send.', kind: 'notify' },
+      { id: 'slack', label: 'Slack', detail: 'Notify with the CRM link.', kind: 'notify' },
     ],
   },
   {
@@ -71,12 +85,12 @@ export const automationPlays: AutomationPlay[] = [
     title: 'Business workflow automation',
     summary: 'Event in, validated process out — the same shape whether the work is a document or a ticket.',
     steps: [
-      { id: 'trig', label: 'Trigger', detail: 'System event or schedule.' },
-      { id: 'val', label: 'Validation', detail: 'Schema and business rules.' },
-      { id: 'ai', label: 'AI processing', detail: 'Extract, classify, or draft.' },
-      { id: 'ext', label: 'External APIs', detail: 'The systems of record.' },
-      { id: 'db', label: 'Database', detail: 'Audit trail.' },
-      { id: 'note', label: 'Notification', detail: 'People who must act.' },
+      { id: 'trig', label: 'Schedule', detail: 'System event or cron.', kind: 'trigger' },
+      { id: 'val', label: 'IF', detail: 'Schema and business rules.', kind: 'if' },
+      { id: 'ai', label: 'OpenAI', detail: 'Extract, classify, or draft.', kind: 'ai' },
+      { id: 'ext', label: 'HTTP Request', detail: 'The systems of record.', kind: 'http' },
+      { id: 'db', label: 'Postgres', detail: 'Audit trail.', kind: 'database' },
+      { id: 'note', label: 'Slack', detail: 'People who must act.', kind: 'notify' },
     ],
   },
 ]

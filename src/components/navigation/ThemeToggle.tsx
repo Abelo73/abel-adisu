@@ -8,7 +8,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      className="inline-flex min-h-12 min-w-12 cursor-pointer items-center justify-center rounded-[8px] text-fg hover:bg-fg/5"
+      className="inline-flex min-h-10 min-w-10 cursor-pointer items-center justify-center rounded-full text-fg hover:bg-fg/5"
       aria-label={`Switch to ${next} mode`}
     >
       {theme === 'dark' ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}

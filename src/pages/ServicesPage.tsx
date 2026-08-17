@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { services } from '@/content/services'
 import { Button } from '@/components/ui/Button'
 import { Container, PageIntro } from '@/components/ui/Container'
+import { GlassCard } from '@/components/ui/Reveal'
 
 export function ServicesPage() {
   return (
@@ -13,22 +14,22 @@ export function ServicesPage() {
       />
       <ul className="grid gap-4">
         {services.map((service) => (
-          <li key={service.slug} className="rounded-[12px] border border-line p-6">
-            <p className="font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-muted">
-              {service.eyebrow}
-            </p>
-            <h2 className="font-display mt-2 text-2xl">
-              <Link to={`/services/${service.slug}`} className="hover:underline">
-                {service.title}
+          <li key={service.slug}>
+            <GlassCard className="p-6">
+              <p className="text-xs uppercase tracking-[0.16em] text-muted">{service.eyebrow}</p>
+              <h2 className="mt-2 text-2xl font-semibold tracking-tight">
+                <Link to={`/services/${service.slug}`} className="hover:underline">
+                  {service.title}
+                </Link>
+              </h2>
+              <p className="mt-3 max-w-3xl text-muted">{service.summary}</p>
+              <Link
+                to={`/services/${service.slug}`}
+                className="mt-4 inline-flex min-h-12 items-center text-sm underline-offset-4 hover:underline"
+              >
+                Scope, process, and stack
               </Link>
-            </h2>
-            <p className="mt-3 max-w-3xl text-muted">{service.summary}</p>
-            <Link
-              to={`/services/${service.slug}`}
-              className="mt-4 inline-flex min-h-12 items-center text-sm underline-offset-4 hover:underline"
-            >
-              Scope, process, and stack
-            </Link>
+            </GlassCard>
           </li>
         ))}
       </ul>

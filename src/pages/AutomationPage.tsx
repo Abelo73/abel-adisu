@@ -10,12 +10,16 @@ export function AutomationPage() {
       <PageIntro eyebrow="Automation" title={automationHero.headline} lede={automationHero.lede} />
       <ul className="flex flex-wrap gap-2">
         {automationCapabilities.map((item) => (
-          <li key={item} className="rounded-full border border-line px-3 py-1 text-sm">
+          <li key={item} className="rounded-full border border-line bg-card px-3 py-1 text-sm">
             {item}
           </li>
         ))}
       </ul>
-      <div className="mt-12">
+      <p className="mt-10 text-sm text-muted">
+        Click a node the way you would in n8n. These canvases are designed like the editor — dotted grid, typed nodes,
+        bezier wires — not a bullet list pretending to be a workflow.
+      </p>
+      <div className="mt-6">
         <WorkflowViz title="Core intelligence path" steps={coreWorkflow} />
       </div>
       <p className="mt-8">
@@ -23,9 +27,13 @@ export function AutomationPage() {
           n8n service page
         </Link>
       </p>
-      <div className="mt-12 space-y-6">
+      <div className="mt-12 space-y-10">
         {automationPlays.map((play) => (
-          <WorkflowViz key={play.slug} title={play.title} steps={play.steps} />
+          <div key={play.slug}>
+            <h2 className="mb-2 text-2xl font-semibold tracking-tight">{play.title}</h2>
+            <p className="mb-5 max-w-2xl text-sm text-muted">{play.summary}</p>
+            <WorkflowViz title={play.title} steps={play.steps} />
+          </div>
         ))}
       </div>
       <div className="mt-12">

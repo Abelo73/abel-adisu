@@ -1,108 +1,66 @@
-import { Link } from 'react-router-dom'
+import { motion, useScroll, useTransform } from 'motion/react'
 import { profile } from '@/content/profile'
-import { projects } from '@/content/projects'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
-import { MetaLabel } from '@/components/ui/MetaLabel'
-import { usePointerParallax, useScrollParallax } from '@/hooks/useParallax'
+import { UpworkHeroCard } from '@/components/hero/UpworkHeroCard'
+import { usePointerParallax } from '@/hooks/useParallax'
+import { useReducedMotion } from '@/hooks/useMedia'
 
 export function StoryHero() {
-  const pointer = usePointerParallax(18)
-  const scrollY = useScrollParallax()
-  const frames = projects.slice(0, 3)
+  const reduced = useReducedMotion()
+  const pointer = usePointerParallax(reduced ? 0 : 48)
+  const { scrollY } = useScroll()
+  const watermarkY = useTransform(scrollY, [0, 900], [0, reduced ? 0 : 280])
+  const copyY = useTransform(scrollY, [0, 700], [0, reduced ? 0 : -70])
+  const cardY = useTransform(scrollY, [0, 900], [0, reduced ? 0 : -140])
 
   return (
-    <section className="relative overflow-hidden border-b border-line">
-      <div
-        className="bg-grid pointer-events-none absolute inset-0"
+    <section className="relative overflow-hidden pb-8 pt-10">
+      <div className="pointer-events-none absolute left-1/2 top-6 w-[140%] -translate-x-1/2" aria-hidden="true">
+        <motion.p className="watermark text-center text-[18vw] leading-none" style={{ y: watermarkY, x: pointer.x * 0.4 }}>
+          ADISU
+        </motion.p>
+      </div>
+      <motion.div
+        className="pointer-events-none absolute left-[8%] top-10 size-[28rem] rounded-full bg-[#7B61FF]/35 blur-[120px]"
+        style={{ x: pointer.x, y: pointer.y }}
         aria-hidden="true"
-        style={{ transform: `translate3d(0, ${scrollY * 0.18}px, 0)` }}
       />
-      <div
-        className="pointer-events-none absolute -top-24 right-[-10%] h-[28rem] w-[28rem] rounded-full bg-fg/5 blur-3xl"
+      <motion.div
+        className="pointer-events-none absolute right-[4%] top-32 size-[22rem] rounded-full bg-[#852848]/30 blur-[110px]"
+        style={{ x: -pointer.x, y: pointer.y * 0.6 }}
         aria-hidden="true"
-        style={{ transform: `translate3d(${pointer.x}px, ${pointer.y + scrollY * 0.08}px, 0)` }}
       />
 
-      <Container className="relative grid items-center gap-16 py-20 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:py-28">
-        <div>
-          <MetaLabel>
-            {profile.locationLabel} · {profile.years}
-          </MetaLabel>
-          <h1 className="font-display mt-6 max-w-[14ch] text-[clamp(3rem,8vw,6.25rem)] font-medium leading-[0.92] tracking-tight">
-            {profile.headline}
-          </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted">{profile.summary}</p>
-          <ul className="mt-5 flex flex-wrap gap-2">
-            {profile.badges.map((badge) => (
-              <li key={badge} className="border border-line px-3 py-1 font-mono text-[0.6875rem] uppercase tracking-[0.08em]">
-                {badge}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button to="/projects">See the work</Button>
-            <Button to="/contact" variant="secondary">
-              Let’s build something
-            </Button>
-          </div>
-          <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-            <li>
-              <a href={profile.social.github} className="underline-offset-4 hover:underline">
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href={profile.social.linkedin} className="underline-offset-4 hover:underline">
-                LinkedIn
-              </a>
-            </li>
-            <li>
-              <a href={profile.social.upwork} className="underline-offset-4 hover:underline">
-                Upwork
-              </a>
-            </li>
-          </ul>
+      <Container className="relative">
+        <div className="flex items-start justify-between gap-6 text-xs uppercase tracking-[0.22em] text-muted">
+          <span>{profile.locationLabel}</span>
+          <span>Upwork · Top Rated</span>
         </div>
 
-        <div className="relative mx-auto h-[420px] w-full max-w-lg lg:h-[520px]">
-          {frames.map((project, index) => (
-            <Link
-              key={project.slug}
-              to={`/projects/${project.slug}`}
-              className="absolute inset-x-0 overflow-hidden rounded-[12px] border border-line bg-card shadow-[var(--shadow-lift)]"
-              style={{
-                top: index * 36,
-                transform: `translate3d(${pointer.x * (index + 1) * 0.35}px, ${pointer.y * (index + 1) * 0.25 - scrollY * (0.04 + index * 0.02)}px, 0) rotate(${index === 0 ? -4 : index === 1 ? 2.5 : 6}deg)`,
-                zIndex: 10 - index,
-                width: `${100 - index * 6}%`,
-                left: `${index * 4}%`,
-              }}
-            >
-              <img
-                src={project.image}
-                alt=""
-                className="aspect-[16/10] w-full object-cover"
-              />
-              <span className="sr-only">{project.title}</span>
-            </Link>
-          ))}
-        </div>
-      </Container>
+        <div className="mt-14 grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+          <motion.div style={{ y: copyY }}>
+            <h1 className="font-display text-[clamp(2.5rem,5.4vw,4.4rem)] italic leading-[1.05] font-medium">
+              Engineering starts with systems.
+            </h1>
+            <p className="mt-6 max-w-xl text-lg text-muted">{profile.summary}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button to="/contact">Hire Abel</Button>
+              <Button href={profile.social.upwork} variant="secondary">
+                Upwork profile
+              </Button>
+            </div>
+            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
+              {profile.badges.map((badge) => (
+                <li key={badge}>{badge}</li>
+              ))}
+            </ul>
+          </motion.div>
 
-      <Container className="relative grid gap-10 border-t border-line py-16 md:grid-cols-3">
-        {profile.story.map((chapter, index) => (
-          <article
-            key={chapter.title}
-            style={{ transform: `translate3d(0, ${Math.max(0, scrollY * 0.04 - index * 4)}px, 0)` }}
-          >
-            <p className="font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-muted">
-              {chapter.kicker}
-            </p>
-            <h2 className="font-display mt-3 text-2xl leading-tight">{chapter.title}</h2>
-            <p className="mt-3 text-sm text-muted">{chapter.body}</p>
-          </article>
-        ))}
+          <motion.div style={{ y: cardY }}>
+            <UpworkHeroCard />
+          </motion.div>
+        </div>
       </Container>
     </section>
   )

@@ -4,7 +4,9 @@ export const profile = {
   name: 'Abel Adisu',
   shortName: 'Abel',
   role: 'Full-Stack Software Engineer',
-  headline: 'Two kinds of work.',
+  headline: 'From database to UI.',
+  intro:
+    'I build secure, scalable backend systems and the polished frontends that sit on top of them — end to end, from database to UI.',
   story: [
     {
       kicker: 'Chapter one',
@@ -19,23 +21,70 @@ export const profile = {
     {
       kicker: 'Chapter three',
       title: 'Ship it in production.',
-      body: 'Six years building production software. Ministry of Revenue by day. Select freelance work on Upwork — Top Rated, 100% Job Success.',
+      body: 'Software Engineer at Atlas Computer Technology. Select freelance work on Upwork — Top Rated, 100% Job Success.',
     },
   ],
   summary:
-    'Full-stack engineer in Addis Ababa. Java, Spring Boot, React, Angular. Clients hire me to build the system correctly — or to finish the one that stalled.',
+    'Full-stack engineer in Addis Ababa. Java, Spring Boot, React, TypeScript. Atlas Computer Technology by day. Select Upwork work on the side.',
   status: 'AVAILABLE FOR SELECT PROJECTS',
   signal: 'BUILD · RESCUE · SHIP',
   locationLabel: 'Addis Ababa, Ethiopia',
   years: '6 years in production',
   education: 'B.Sc., Wollega University, 2019–2023',
-  email: 'EMAIL_ADDRESS',
+  email: 'abeladisu73@gmail.com',
+  employer: 'Atlas Computer Technology',
+  availability: 'Open to full-stack, backend-focused, and frontend-heavy work — on-site, hybrid, or remote.',
   social: {
     github: 'https://github.com/Abelo73',
     linkedin: 'https://www.linkedin.com/in/abeladisunugatu/',
     upwork: 'https://www.upwork.com/freelancers/~01e478e25e9d736c67',
   },
   badges: ['Top Rated', '100% Job Success'],
+  photo: '/abel-adisu.png',
+  topSkills: ['Java', 'Spring Boot', 'Keycloak', 'Apache Kafka', 'Spring MVC'],
+  layers: [
+    {
+      id: 'ui',
+      label: 'UI',
+      title: 'The surface operators can run',
+      items: [
+        'React, Angular, TypeScript, Tailwind CSS, shadcn/ui',
+        'Dashboard-heavy, role-based UI for enterprise workflows',
+        'API integration and real-time data views',
+      ],
+    },
+    {
+      id: 'api',
+      label: 'API',
+      title: 'The contracts the system keeps',
+      items: [
+        'Java & Spring Boot, Kotlin',
+        'REST API design and event-driven microservices (Kafka)',
+        'Authentication: JWT, OAuth2, Keycloak, RBAC',
+      ],
+    },
+    {
+      id: 'data',
+      label: 'Data',
+      title: 'The record that has to be true',
+      items: [
+        'PostgreSQL / MySQL schema design and optimization',
+        'Docker, Kubernetes, Grafana, Loki',
+        'CI/CD pipelines and containerized deployments',
+      ],
+    },
+  ],
+  clientsGet: [
+    'End-to-end feature ownership — UI, API, database, deployment',
+    'Clean, production-ready code with test coverage',
+    'Clear communication and fast iteration',
+  ],
+  shipped: [
+    { title: 'Justice case management', hint: 'Government casework, not a demo.' },
+    { title: 'Real-time tax risk scoring', hint: 'Revenue operations that have to be correct.' },
+    { title: 'Hospital operations', hint: 'Software a clinic can actually run.' },
+    { title: 'Multi-tenant SaaS', hint: 'Production client environments.' },
+  ],
   focus: [
     'Java & Spring Boot specialist',
     'React, Angular & TypeScript',

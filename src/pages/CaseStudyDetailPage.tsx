@@ -20,11 +20,11 @@ export function CaseStudyDetailPage() {
       <PageIntro eyebrow="Case study" title={project.title} lede={study.thesis} />
       <ol className="grid gap-8 md:grid-cols-2">
         <li>
-          <h2 className="font-display text-2xl">Problem</h2>
+          <h2 className="text-2xl font-semibold tracking-tight">Problem</h2>
           <p className="mt-3 text-muted">{project.problem}</p>
         </li>
         <li>
-          <h2 className="font-display text-2xl">Implementation</h2>
+          <h2 className="text-2xl font-semibold tracking-tight">Implementation</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-muted">
             {project.implementation.map((item) => (
               <li key={item}>{item}</li>
@@ -33,7 +33,7 @@ export function CaseStudyDetailPage() {
         </li>
       </ol>
       <section className="mt-12 max-w-xl">
-        <h2 className="font-display text-2xl">Architecture</h2>
+        <h2 className="text-2xl font-semibold tracking-tight">Architecture</h2>
         <div className="mt-5">
           <ArchitectureGraph
             title="Trace the system"
@@ -48,7 +48,7 @@ export function CaseStudyDetailPage() {
         </div>
       </section>
       <section className="mt-12">
-        <h2 className="font-display text-2xl">Result</h2>
+        <h2 className="text-2xl font-semibold tracking-tight">Result</h2>
         <p className="mt-3 text-muted">{project.outcome}</p>
       </section>
       <p className="mt-8">

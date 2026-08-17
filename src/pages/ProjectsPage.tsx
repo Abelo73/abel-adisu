@@ -28,7 +28,7 @@ export function ProjectsPage() {
             onClick={() => setFilter(item.id)}
             className={cn(
               'min-h-12 cursor-pointer rounded-full border px-4 text-sm',
-              filter === item.id ? 'border-fg bg-fg text-bg' : 'border-line hover:border-fg/40',
+              filter === item.id ? 'border-accent bg-accent text-white' : 'border-line bg-card hover:border-fg/40',
             )}
           >
             {item.label}
@@ -45,12 +45,12 @@ export function ProjectsPage() {
                 <img
                   src={project.image}
                   alt=""
-                  className="aspect-[16/10] w-full rounded-[12px] border border-line object-cover"
+                  className="aspect-[16/10] w-full rounded-[24px] border border-line object-cover shadow-[var(--shadow-lift)]"
                 />
-                <p className="mt-4 font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-muted">
+                <p className="mt-4 text-xs uppercase tracking-[0.16em] text-muted">
                   {project.kind.replace('-', ' ')} · {project.category}
                 </p>
-                <h2 className="mt-2 font-display text-2xl">{project.title}</h2>
+                <h2 className="mt-2 text-2xl font-semibold tracking-tight">{project.title}</h2>
                 <p className="mt-2 text-muted">{project.summary}</p>
               </Link>
             </li>

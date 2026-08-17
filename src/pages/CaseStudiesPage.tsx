@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { caseStudies, caseStudyProject } from '@/content/caseStudies'
 import { Container, PageIntro } from '@/components/ui/Container'
+import { GlassCard } from '@/components/ui/Reveal'
 
 export function CaseStudiesPage() {
   return (
@@ -15,13 +16,15 @@ export function CaseStudiesPage() {
           const project = caseStudyProject(study)
           if (!project) return null
           return (
-            <li key={study.slug} className="rounded-[12px] border border-line p-6">
-              <h2 className="font-display text-2xl">
-                <Link to={`/case-studies/${study.slug}`} className="hover:underline">
-                  {project.title}
-                </Link>
-              </h2>
-              <p className="mt-3 text-muted">{study.thesis}</p>
+            <li key={study.slug}>
+              <GlassCard className="p-6">
+                <h2 className="text-2xl font-semibold tracking-tight">
+                  <Link to={`/case-studies/${study.slug}`} className="hover:underline">
+                    {project.title}
+                  </Link>
+                </h2>
+                <p className="mt-3 text-muted">{study.thesis}</p>
+              </GlassCard>
             </li>
           )
         })}

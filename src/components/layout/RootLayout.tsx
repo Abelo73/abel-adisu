@@ -2,6 +2,8 @@ import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { SiteHeader } from '@/components/navigation/SiteHeader'
 import { SiteFooter } from '@/components/layout/SiteFooter'
+import { HireDock } from '@/components/layout/HireDock'
+import { AtmosphereOrbs } from '@/components/layout/AtmosphereOrbs'
 import { Seo } from '@/components/seo/Seo'
 import { CustomCursor } from '@/components/animations/CustomCursor'
 import { useReducedMotion } from '@/hooks/useMedia'
@@ -11,17 +13,18 @@ export function RootLayout() {
   const reduced = useReducedMotion()
 
   return (
-    <div className="flex min-h-dvh flex-col bg-bg text-fg">
+    <div className="atmosphere flex min-h-dvh flex-col text-fg">
       <a
         href="#content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-fg"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-white"
       >
         Skip to content
       </a>
       <Seo />
       <CustomCursor />
+      <AtmosphereOrbs />
       <SiteHeader />
-      <main id="content" className="relative flex-1">
+      <main id="content" className="relative flex-1 pb-24">
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
@@ -35,6 +38,7 @@ export function RootLayout() {
         </AnimatePresence>
       </main>
       <SiteFooter />
+      <HireDock />
       <ScrollRestoration />
     </div>
   )

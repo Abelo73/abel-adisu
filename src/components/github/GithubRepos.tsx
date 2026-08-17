@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { listPublicRepos, type GithubResult } from '@/lib/githubService'
+import { newTab } from '@/lib/links'
 
 export function GithubRepos() {
   const [result, setResult] = useState<GithubResult | { status: 'loading'; repos: [] }>({
@@ -43,10 +44,10 @@ export function GithubRepos() {
   }
 
   return (
-    <ul className="divide-y divide-line border-y border-line">
+    <ul className="overflow-hidden rounded-[24px] border border-line bg-card">
       {result.repos.map((repo) => (
-        <li key={repo.url}>
-          <a href={repo.url} className="block py-3 hover:bg-fg/5">
+        <li key={repo.url} className="border-b border-line last:border-b-0">
+          <a href={repo.url} {...newTab} className="block px-4 py-3 hover:bg-fg/5">
             <span className="font-medium">{repo.name}</span>
             <span className="mt-1 block text-sm text-muted">{repo.description}</span>
           </a>

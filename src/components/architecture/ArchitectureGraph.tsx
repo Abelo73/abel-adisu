@@ -16,7 +16,7 @@ export function ArchitectureGraph({
   const current = nodes.find((node) => node.id === active) ?? nodes[0]
 
   return (
-    <div className="rounded-[12px] border border-line bg-card/60 p-4 sm:p-6">
+    <div className="glass rounded-[24px] p-4 sm:p-6">
       <p id={labelId} className="font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-muted">
         {title}
       </p>
@@ -30,7 +30,7 @@ export function ArchitectureGraph({
                 data-cursor="node"
                 onClick={() => setActive(node.id)}
                 className={cn(
-                  'flex min-h-12 w-full cursor-pointer items-center justify-between gap-3 rounded-[8px] border px-4 py-3 text-left transition-colors duration-150',
+                  'flex min-h-12 w-full cursor-pointer items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-left transition-colors duration-150',
                   isActive
                     ? 'border-steel bg-steel/10'
                     : 'border-line hover:border-steel/50',

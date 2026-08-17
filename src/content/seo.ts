@@ -1,4 +1,4 @@
-import { SITE_URL } from '@/content/profile'
+import { profile, SITE_URL } from '@/content/profile'
 
 export type SeoConfig = {
   title: string
@@ -17,12 +17,12 @@ export const seoByPath: Record<string, SeoConfig> = {
   '/': defaultSeo,
   '/about': {
     title: 'About — Abel Adisu',
-    description: 'Engineering philosophy, what Abel builds, and how he approaches production software.',
+    description: 'From database to UI: Atlas Computer Technology, Upwork, and the systems Abel actually ships.',
     path: '/about',
   },
   '/experience': {
     title: 'Experience — Abel Adisu',
-    description: 'Professional timeline: software development through full-stack, platform, and automation work.',
+    description: 'QA into Software Engineer at Atlas Computer Technology, plus independent Upwork work.',
     path: '/experience',
   },
   '/skills': {
@@ -75,9 +75,11 @@ export function jsonLdPerson() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Abel Adisu',
-    jobTitle: 'Full-Stack Software Engineer',
+    name: profile.name,
+    jobTitle: profile.role,
+    email: profile.email,
     url: SITE_URL,
+    sameAs: [profile.social.github, profile.social.linkedin, profile.social.upwork],
     knowsAbout: ['Java', 'Spring Boot', 'React', 'TypeScript', 'Kubernetes', 'n8n', 'AI automation'],
   }
 }

@@ -2,6 +2,8 @@ export type ExperienceItem = {
   id: string
   role: string
   org: string
+  location: string
+  workMode: string
   period: string
   summary: string
   responsibilities: string[]
@@ -10,31 +12,79 @@ export type ExperienceItem = {
 
 export const experience: ExperienceItem[] = [
   {
-    id: 'ministry-of-revenue',
+    id: 'atlas-software-engineer',
     role: 'Software Engineer',
-    org: 'Ministry of Revenue',
-    period: 'Present',
+    org: 'Atlas Computer Technology',
+    location: 'Addis Ababa, Ethiopia',
+    workMode: 'On-site',
+    period: 'March 2024 – Present',
     summary:
-      'Production Java systems in a revenue context: risk, data, and the operational software tax authorities actually run.',
+      'Full-stack engineer on long-running enterprise systems — secure web applications from architecture through deployment.',
     responsibilities: [
-      'Build and maintain backend services in Java and Spring Boot.',
-      'Work on tax-risk and revenue workflows where correctness matters more than novelty.',
-      'Support migrations and integrations, including MySQL to PostgreSQL paths when the data layer has to move.',
+      'Build role-based dashboards and UI in React, Vite, shadcn/ui, and Ant Design, including state management for operational consoles.',
+      'Design and ship Java Spring Boot microservices and REST APIs.',
+      'Own identity and data: PostgreSQL, Keycloak, OAuth2, and JWT.',
+      'Build event-driven paths with Kafka.',
+      'Work with the team from architecture discussion through deployment, with maintainable code as the bar.',
     ],
-    technologies: ['Java', 'Spring Boot', 'PostgreSQL', 'MySQL', 'REST APIs'],
+    technologies: [
+      'Java',
+      'Spring Boot',
+      'React',
+      'Vite',
+      'shadcn/ui',
+      'Ant Design',
+      'PostgreSQL',
+      'Keycloak',
+      'OAuth2',
+      'JWT',
+      'Kafka',
+    ],
+  },
+  {
+    id: 'atlas-qa-engineer',
+    role: 'QA Engineer',
+    org: 'Atlas Computer Technology',
+    location: 'Addis Ababa, Ethiopia',
+    workMode: 'On-site',
+    period: 'September 2023 – March 2024',
+    summary:
+      'Automated and manual testing to cut regression effort before moving into the software-engineer seat.',
+    responsibilities: [
+      'Wrote and maintained Selenium WebDriver scripts for web application testing.',
+      'Integrated automated runs into regression cycles.',
+      'Ran API automation and manual checks in Postman.',
+      'Identified repeatable scenarios worth automating instead of re-testing by hand.',
+    ],
+    technologies: ['Selenium WebDriver', 'Postman', 'Linux', 'Quality Assurance'],
   },
   {
     id: 'upwork-freelance',
-    role: 'Full-Stack Developer',
-    org: 'Upwork — independent',
-    period: 'Ongoing',
+    role: 'Java Spring Boot Backend Engineer',
+    org: 'Upwork',
+    location: 'Remote',
+    workMode: 'Freelance',
+    period: 'September 2023 – Present',
     summary:
-      'Select freelance work: new enterprise systems, and rescue jobs — bugs, integrations, and unfinished features. Top Rated. 100% Job Success.',
+      'Independent backend and full-stack work for paying clients: secure APIs, JWT, Keycloak, Kafka. Top Rated. 100% Job Success.',
     responsibilities: [
-      'Deliver React, Angular, and Spring Boot applications for paying clients.',
-      'Optimize existing Spring Boot services and close integration gaps.',
-      'Own the path from requirement to a running admin console, API, or workflow.',
+      'Fixed a critical memory issue, PostgreSQL migration problems, and backend stability on a Java Spring Boot production service.',
+      'Integrated WhatsApp via Meta APIs, secured PHP/Laravel API traffic, and added bot-attack protection.',
+      'Optimized an existing Spring Boot microservice and delivered a Spring Boot API integration on time.',
     ],
-    technologies: ['Java', 'Spring Boot', 'React', 'Angular', 'Supabase', 'Stripe', 'PostgreSQL'],
+    technologies: ['Java', 'Spring Boot', 'PostgreSQL', 'Meta APIs', 'REST APIs'],
   },
 ]
+
+export function experienceByOrg() {
+  const groups: { org: string; location: string; roles: ExperienceItem[] }[] = []
+  for (const item of experience) {
+    const last = groups.at(-1)
+    if (last && last.org === item.org) {
+      last.roles.push(item)
+    } else {
+      groups.push({ org: item.org, location: item.location, roles: [item] })
+    }
+  }
+  return groups
+}

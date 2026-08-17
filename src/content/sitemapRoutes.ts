@@ -2,6 +2,7 @@ export const sitemapRoutes = [
   '/',
   '/about',
   '/journey',
+  '/story',
   '/experience',
   '/skills',
   '/projects',

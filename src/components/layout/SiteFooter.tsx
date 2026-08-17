@@ -18,6 +18,11 @@ export function SiteFooter() {
             </Link>
           </li>
           <li>
+            <Link to="/story" className="underline-offset-4 hover:underline">
+              My Story
+            </Link>
+          </li>
+          <li>
             <Link to="/journey" className="underline-offset-4 hover:underline">
               Journey
             </Link>

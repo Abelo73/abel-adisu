@@ -36,6 +36,9 @@ const ContactPage = lazy(() =>
 const JourneyPage = lazy(() =>
   import('@/pages/JourneyPage').then((m) => ({ default: m.JourneyPage })),
 )
+const OriginStoryPage = lazy(() =>
+  import('@/pages/OriginStoryPage').then((m) => ({ default: m.OriginStoryPage })),
+)
 const LabPage = lazy(() => import('@/pages/LabPage').then((m) => ({ default: m.LabPage })))
 const NotFoundPage = lazy(() =>
   import('@/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })),
@@ -72,6 +75,7 @@ export const router = createBrowserRouter([
       { path: 'upwork', element: wrap(<UpworkPage />) },
       { path: 'contact', element: wrap(<ContactPage />) },
       { path: 'journey', element: wrap(<JourneyPage />) },
+      { path: 'story', element: wrap(<OriginStoryPage />) },
       { path: 'lab', element: wrap(<LabPage />) },
       { path: '*', element: wrap(<NotFoundPage />) },
     ],

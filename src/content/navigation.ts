@@ -10,6 +10,7 @@ export const primaryNav: NavItem[] = [
   { to: '/automation', label: 'Automation', keywords: ['n8n', 'ai'] },
   { to: '/about', label: 'About' },
   { to: '/journey', label: 'Journey' },
+  { to: '/story', label: 'My Story' },
   { to: '/experience', label: 'Experience' },
 ]
 
@@ -20,6 +21,7 @@ export const commandItems: NavItem[] = [
   { to: '/automation', label: 'Go to Automation' },
   { to: '/about', label: 'Go to About' },
   { to: '/journey', label: 'Go to Journey', keywords: ['story', 'ece', 'wollega'] },
+  { to: '/story', label: 'Go to My Story', keywords: ['origin', 'timeline'] },
   { to: '/experience', label: 'Go to Experience' },
   { to: '/skills', label: 'Go to Skills' },
   { to: '/upwork', label: 'Go to Upwork' },

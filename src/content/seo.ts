@@ -26,6 +26,12 @@ export const seoByPath: Record<string, SeoConfig> = {
       'From Electrical & Computer Engineering at Wollega to software engineering at Atlas — a path that was not a straight line.',
     path: '/journey',
   },
+  '/story': {
+    title: 'My Story — Abel Adisu',
+    description:
+      'Origin story: Grade 10, the 325 and 376 scores, Wollega ECE, Atlas QA to software engineer. Still looking.',
+    path: '/story',
+  },
   '/experience': {
     title: 'Experience — Abel Adisu',
     description: 'Currently Software Engineer at Atlas Computer Technology. QA first, then the engineer seat — plus independent Upwork work.',

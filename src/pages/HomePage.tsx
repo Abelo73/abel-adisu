@@ -1,15 +1,10 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
-import { profile } from '@/content/profile'
 import { projects } from '@/content/projects'
 import { services } from '@/content/services'
 import { StoryHero } from '@/components/hero/StoryHero'
 import { StackWorkflow } from '@/components/architecture/StackWorkflow'
-import { AboutPractice } from '@/components/home/AboutPractice'
 import { ScopePath } from '@/components/home/ScopePath'
-import { KeyInsights } from '@/components/home/KeyInsights'
-import { PracticeStories } from '@/components/home/PracticeStories'
-import { HypothesisFlow } from '@/components/home/HypothesisFlow'
 import { coreWorkflow } from '@/content/automation'
 import { WorkflowViz } from '@/components/automation/WorkflowViz'
 import { ClientStories } from '@/components/home/ClientStories'
@@ -43,19 +38,7 @@ export function HomePage() {
 
       <Container>
         <Reveal>
-          <AboutPractice />
-        </Reveal>
-        <Reveal>
           <ScopePath />
-        </Reveal>
-        <Reveal>
-          <KeyInsights />
-        </Reveal>
-        <Reveal>
-          <PracticeStories />
-        </Reveal>
-        <Reveal>
-          <HypothesisFlow />
         </Reveal>
       </Container>
 
@@ -113,21 +96,6 @@ export function HomePage() {
             >
               All automation plays
             </Link>
-          </Reveal>
-        </Container>
-      </section>
-
-      <section className="py-24">
-        <Container>
-          <Reveal>
-            <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">What this practice is for</h2>
-            <ul className="mt-10 flex flex-wrap gap-3">
-              {profile.builds.map((item) => (
-                <li key={item} className="rounded-full border border-line bg-card px-5 py-3 text-sm backdrop-blur-md">
-                  {item}
-                </li>
-              ))}
-            </ul>
           </Reveal>
         </Container>
       </section>

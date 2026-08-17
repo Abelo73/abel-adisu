@@ -131,6 +131,39 @@ export function AboutPage() {
         </section>
 
         <section className="mt-24">
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">In-depth practice</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">The numbers that are actually true</h2>
+          <ul className="mt-10 grid gap-8 sm:grid-cols-3">
+            <li>
+              <p className="font-display text-6xl italic">{profile.years.split(' ')[0]}</p>
+              <p className="mt-3 text-sm text-muted">Years in production systems</p>
+            </li>
+            <li>
+              <p className="font-display text-6xl italic">4</p>
+              <p className="mt-3 text-sm text-muted">Shipped products on this site</p>
+            </li>
+            <li>
+              <p className="font-display text-6xl italic">2</p>
+              <p className="mt-3 text-sm text-muted">Kinds of work: build or rescue</p>
+            </li>
+          </ul>
+        </section>
+
+        <section className="mt-24">
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">Build. Rescue. Ship.</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">How the practice moves</h2>
+          <ul className="mt-10 grid gap-4 md:grid-cols-3">
+            {profile.story.map((chapter) => (
+              <li key={chapter.kicker} className="rounded-[24px] border border-line bg-card px-5 py-6">
+                <p className="text-xs uppercase tracking-[0.16em] text-muted">{chapter.kicker}</p>
+                <p className="mt-3 font-medium">{chapter.title}</p>
+                <p className="mt-2 text-sm text-muted">{chapter.body}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-24">
           <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">GitHub</h2>
           <div className="mt-6">
             <GithubRepos />

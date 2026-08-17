@@ -1,5 +1,4 @@
 import { profile } from '@/content/profile'
-import { Button } from '@/components/ui/Button'
 import { isConfiguredEmail, isConfiguredUrl, newTab } from '@/lib/links'
 import { cn } from '@/lib/cn'
 import type { ReactNode } from 'react'

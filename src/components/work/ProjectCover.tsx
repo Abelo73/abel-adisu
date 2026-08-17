@@ -19,14 +19,30 @@ export function ProjectCover({
           <span className="size-2 rounded-full bg-[#febc2e]" aria-hidden="true" />
           <span className="size-2 rounded-full bg-[#28c840]" aria-hidden="true" />
         </div>
-        <img src={src} alt={alt} className="block h-auto w-full rounded-[12px]" />
+        <img
+          src={src}
+          alt={alt}
+          width={1600}
+          height={900}
+          loading="lazy"
+          decoding="async"
+          className="block h-auto w-full rounded-[12px]"
+        />
       </div>
     )
   }
 
   return (
     <div className={cn('overflow-hidden rounded-[24px] border border-line bg-[#111118] shadow-[var(--shadow-lift)]', className)}>
-      <img src={src} alt={alt} className="block h-auto w-full" />
+      <img
+        src={src}
+        alt={alt}
+        width={1600}
+        height={900}
+        loading="lazy"
+        decoding="async"
+        className="block h-auto w-full"
+      />
     </div>
   )
 }

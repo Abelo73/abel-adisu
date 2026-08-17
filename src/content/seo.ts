@@ -67,14 +67,16 @@ export const seoByPath: Record<string, SeoConfig> = {
   },
 }
 
+export const ogImagePath = '/og.jpg'
+
 export function absoluteUrl(path: string) {
   return new URL(path, SITE_URL).toString()
 }
 
 export function jsonLdPerson() {
   return {
-    '@context': 'https://schema.org',
     '@type': 'Person',
+    '@id': `${SITE_URL}#person`,
     name: profile.name,
     jobTitle: profile.current.role,
     email: profile.email,
@@ -92,5 +94,23 @@ export function jsonLdPerson() {
     },
     sameAs: [profile.social.github, profile.social.linkedin, profile.social.upwork],
     knowsAbout: ['Java', 'Spring Boot', 'Angular', 'React', 'TypeScript', 'Keycloak', 'Kafka', 'Supabase', 'n8n'],
+  }
+}
+
+export function jsonLdGraph() {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      jsonLdPerson(),
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}#website`,
+        name: profile.name,
+        url: SITE_URL,
+        description: defaultSeo.description,
+        inLanguage: 'en',
+        publisher: { '@id': `${SITE_URL}#person` },
+      },
+    ],
   }
 }

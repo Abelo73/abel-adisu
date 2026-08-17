@@ -8,6 +8,8 @@ export function HireDock() {
         <img
           src={profile.photo}
           alt={profile.name}
+          width={80}
+          height={80}
           className="size-10 rounded-full object-cover object-top ring-2 ring-ok/40"
         />
         <p className="hidden min-w-0 text-sm sm:block">At Atlas. Open to select work.</p>

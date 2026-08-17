@@ -96,6 +96,10 @@ export function HomePage() {
               <img
                 src={profile.photo}
                 alt={profile.name}
+                width={900}
+                height={1200}
+                loading="lazy"
+                decoding="async"
                 className="aspect-[4/5] w-full max-w-sm rounded-[28px] object-cover shadow-[var(--shadow-lift)]"
               />
               <div>

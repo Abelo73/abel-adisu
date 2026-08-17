@@ -53,8 +53,8 @@ export const projects: Project[] = [
     title: 'Art Information Center',
     kind: 'shipped-work',
     category: 'fullstack',
-    image: '/art-information-center-case-study.png',
-    detailImage: '/work/art-information-center.png',
+    image: '/art-information-center-case-study.webp',
+    detailImage: '/work/art-information-center.webp',
     summary:
       'Live Upwork product: arts-community platform at artinformationcenter.com — discover feed, profiles, Stripe payments, grants, sponsors, and events.',
     problem:
@@ -106,7 +106,7 @@ export const projects: Project[] = [
     title: 'ITAS Risk Studio',
     kind: 'shipped-work',
     category: 'fullstack',
-    image: '/work/itas-risk-studio.png',
+    image: '/work/itas-risk-studio.webp',
     coverKind: 'screen',
     summary:
       'Angular risk console for a tax administration engine. Taxpayer scores, fraud-risk flags, and case drill-downs on Java Spring Boot services.',
@@ -156,8 +156,8 @@ export const projects: Project[] = [
     title: 'MediCare',
     kind: 'shipped-work',
     category: 'fullstack',
-    image: '/medicare-hms-case-study.png',
-    detailImage: '/work/medicare.png',
+    image: '/medicare-hms-case-study.webp',
+    detailImage: '/work/medicare.webp',
     summary:
       'Hospital management system. Java Spring Boot and React. Operations dashboard: queues, occupancy, appointments.',
     problem:
@@ -205,8 +205,8 @@ export const projects: Project[] = [
     title: 'IJCMS',
     kind: 'shipped-work',
     category: 'backend',
-    image: '/ijcms-justice-platform-case-study.png',
-    detailImage: '/work/ijcms.png',
+    image: '/ijcms-justice-platform-case-study.webp',
+    detailImage: '/work/ijcms.webp',
     summary:
       'Integrated Justice Case Management System. Java Spring Boot platform for case files, stages, and documents.',
     problem:
@@ -253,7 +253,7 @@ export const projects: Project[] = [
     title: 'Workforce',
     kind: 'shipped-work',
     category: 'fullstack',
-    image: '/workforce-angular-case-study.png',
+    image: '/workforce-angular-case-study.webp',
     summary:
       'Enterprise workforce operations in Angular: employees, departments, tasks, attendance, and a dashboard operators can run.',
     problem:

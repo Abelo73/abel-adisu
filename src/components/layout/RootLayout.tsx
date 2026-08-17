@@ -5,7 +5,6 @@ import { SiteFooter } from '@/components/layout/SiteFooter'
 import { HireDock } from '@/components/layout/HireDock'
 import { AtmosphereOrbs } from '@/components/layout/AtmosphereOrbs'
 import { Seo } from '@/components/seo/Seo'
-import { CustomCursor } from '@/components/animations/CustomCursor'
 import { useReducedMotion } from '@/hooks/useMedia'
 
 export function RootLayout() {
@@ -21,7 +20,6 @@ export function RootLayout() {
         Skip to content
       </a>
       <Seo />
-      <CustomCursor />
       <AtmosphereOrbs />
       <SiteHeader />
       <main id="content" className="relative flex-1 pb-24">

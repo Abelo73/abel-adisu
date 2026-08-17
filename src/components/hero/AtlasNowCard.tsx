@@ -25,6 +25,10 @@ export function AtlasNowCard() {
           <img
             src={profile.photo}
             alt={profile.name}
+            width={900}
+            height={1200}
+            fetchPriority="high"
+            decoding="async"
             className="size-[4.5rem] rounded-full object-cover object-top ring-2 ring-ok/50 ring-offset-2 ring-offset-bg"
           />
           <div className="min-w-0">

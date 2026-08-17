@@ -51,8 +51,8 @@ export const profile = {
     upwork: 'https://www.upwork.com/freelancers/~01e478e25e9d736c67',
   },
   badges: ['Top Rated', '100% Job Success'],
-  photo: '/abel-adisu.jpg',
-  deskPhoto: '/abel-at-desk.jpg',
+  photo: '/abel-adisu.webp',
+  deskPhoto: '/abel-at-desk.webp',
   cv: '/Abel_Adisu_CV.pdf',
   topSkills: ['Java', 'Spring Boot', 'Angular', 'React', 'Apache Kafka'],
   layers: [

@@ -68,7 +68,16 @@ export function ParallaxMedia({
 
   return (
     <div ref={ref} className={cn('aspect-[16/10] overflow-hidden', className)}>
-      <motion.img src={src} alt={alt} style={{ y }} className="h-[130%] w-full object-cover" />
+      <motion.img
+        src={src}
+        alt={alt}
+        width={1600}
+        height={1000}
+        loading="lazy"
+        decoding="async"
+        style={{ y }}
+        className="h-[130%] w-full object-cover"
+      />
     </div>
   )
 }

@@ -10,7 +10,7 @@ import { cn } from '@/lib/cn'
 const panes = [
   {
     slug: 'ijcms',
-    src: '/work/ijcms.png',
+    src: '/work/ijcms.webp',
     className: 'left-[48%] top-[2%] w-[38%] max-lg:left-auto max-lg:top-auto max-lg:w-auto',
     rotateY: -26,
     rotateX: 12,
@@ -18,7 +18,7 @@ const panes = [
   },
   {
     slug: 'itas-risk-studio',
-    src: '/work/itas-risk-studio.png',
+    src: '/work/itas-risk-studio.webp',
     className: 'left-[2%] top-[28%] w-[36%] max-lg:left-auto max-lg:top-auto max-lg:w-auto',
     rotateY: -28,
     rotateX: 10,
@@ -26,7 +26,7 @@ const panes = [
   },
   {
     slug: 'medicare',
-    src: '/work/medicare.png',
+    src: '/work/medicare.webp',
     className: 'left-[54%] top-[38%] w-[40%] max-lg:left-auto max-lg:top-auto max-lg:w-auto',
     rotateY: -12,
     rotateX: 7,
@@ -34,7 +34,7 @@ const panes = [
   },
   {
     slug: 'art-information-center',
-    src: '/work/art-information-center.png',
+    src: '/work/art-information-center.webp',
     className: 'left-[18%] top-[10%] w-[48%] max-lg:left-auto max-lg:top-auto max-lg:w-auto',
     rotateY: -16,
     rotateX: 8,
@@ -120,6 +120,10 @@ export function WorkStage() {
                     <img
                       src={pane.src}
                       alt={project.title}
+                      width={1600}
+                      height={1000}
+                      loading="lazy"
+                      decoding="async"
                       className="aspect-[16/10] w-full object-cover object-top"
                     />
                   </motion.span>

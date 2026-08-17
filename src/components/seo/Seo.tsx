@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { absoluteUrl, defaultSeo, jsonLdPerson, seoByPath } from '@/content/seo'
-import { profile } from '@/content/profile'
+import { absoluteUrl, defaultSeo, jsonLdGraph, ogImagePath, seoByPath } from '@/content/seo'
 import { getProject } from '@/content/projects'
 import { getService } from '@/content/services'
 import { getCaseStudy, caseStudyProject } from '@/content/caseStudies'
@@ -56,16 +55,24 @@ export function Seo() {
       }
     }
 
+    const url = absoluteUrl(path)
+    const image = absoluteUrl(ogImagePath)
+
     document.title = title
     upsertMeta('name', 'description', description)
     upsertMeta('property', 'og:title', title)
     upsertMeta('property', 'og:description', description)
     upsertMeta('property', 'og:type', 'website')
-    upsertMeta('property', 'og:url', absoluteUrl(path))
-    upsertMeta('property', 'og:image', absoluteUrl(profile.photo))
+    upsertMeta('property', 'og:url', url)
+    upsertMeta('property', 'og:image', image)
+    upsertMeta('property', 'og:image:width', '1200')
+    upsertMeta('property', 'og:image:height', '630')
+    upsertMeta('property', 'og:locale', 'en_US')
+    upsertMeta('property', 'og:site_name', 'Abel Adisu')
     upsertMeta('name', 'twitter:card', 'summary_large_image')
     upsertMeta('name', 'twitter:title', title)
     upsertMeta('name', 'twitter:description', description)
+    upsertMeta('name', 'twitter:image', image)
 
     let canonical = document.head.querySelector('link[rel="canonical"]')
     if (!canonical) {
@@ -73,16 +80,16 @@ export function Seo() {
       canonical.setAttribute('rel', 'canonical')
       document.head.appendChild(canonical)
     }
-    canonical.setAttribute('href', absoluteUrl(path))
+    canonical.setAttribute('href', url)
 
-    let jsonLd = document.getElementById('jsonld-person')
+    let jsonLd = document.getElementById('jsonld-graph')
     if (!jsonLd) {
       jsonLd = document.createElement('script')
-      jsonLd.id = 'jsonld-person'
+      jsonLd.id = 'jsonld-graph'
       jsonLd.setAttribute('type', 'application/ld+json')
       document.head.appendChild(jsonLd)
     }
-    jsonLd.textContent = JSON.stringify(jsonLdPerson())
+    jsonLd.textContent = JSON.stringify(jsonLdGraph())
   }, [pathname])
 
   return null

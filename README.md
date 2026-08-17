@@ -6,6 +6,32 @@ Personal site for a software engineer in production at Atlas Computer Technology
 
 Not a template portfolio. The work on `/projects` is real: arts admin in production, tax risk UI, hospital operations, justice case management, workforce ops. Upwork is Top Rated with 100% Job Success — no rates, no invented metrics.
 
+## Look
+
+Hero — Atlas in production, current role, stack on the desk.
+
+![Hero](docs/screenshots/hero.jpg)
+
+How I ship — UI through Camunda, Java services, Keycloak, and Supabase.
+
+![How I ship](docs/screenshots/how-i-ship.jpg)
+
+User stories — the jobs the system has to support, plus real Upwork quotes.
+
+![User stories](docs/screenshots/user-stories.jpg)
+
+Shipped — live product screens in space.
+
+![Shipped work](docs/screenshots/shipped.jpg)
+
+Services — walk the path; each stop opens the engagement in full view.
+
+![Services path](docs/screenshots/services.jpg)
+
+About — a person, not a stack list.
+
+![About](docs/screenshots/about.jpg)
+
 ## Stack
 
 React 19 · TypeScript · Vite · Tailwind CSS v4 · React Router 7 · Motion
@@ -49,7 +75,7 @@ Content lives in `src/content/`. Change copy there, not in page components.
 1. Create the GitHub repo **`abel-adisu`** (public) under `Abelo73`.
 2. Push this branch (see below).
 3. In Vercel: **Add New → Project → import `abel-adisu`**. Framework: Vite. Output: `dist`.
-4. Set `VITE_SITE_URL` to the Vercel URL (or your domain), then redeploy.
+4. Set `VITE_SITE_URL` to the Vercel URL (or your domain), then redeploy. That URL is used for canonical tags, Open Graph, JSON-LD, and `sitemap.xml`.
 
 SPA fallback is in `vercel.json` so `/projects/…` and `/services/…` do not 404 on refresh.
 

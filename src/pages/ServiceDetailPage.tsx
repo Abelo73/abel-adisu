@@ -8,12 +8,6 @@ import { WorkflowViz } from '@/components/automation/WorkflowViz'
 import { Button } from '@/components/ui/Button'
 import { Container, PageIntro } from '@/components/ui/Container'
 import { useReducedMotion } from '@/hooks/useMedia'
-import { coreWorkflow } from '@/content/automation'
-import { getService } from '@/content/services'
-import { ArchitectureGraph } from '@/components/architecture/ArchitectureGraph'
-import { WorkflowViz } from '@/components/automation/WorkflowViz'
-import { Button } from '@/components/ui/Button'
-import { Container, PageIntro } from '@/components/ui/Container'
 
 export function ServiceDetailPage() {
   const { slug } = useParams()

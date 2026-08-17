@@ -27,6 +27,10 @@ export function AboutStoryHero() {
           src={profile.deskPhoto}
           alt=""
           aria-hidden="true"
+          width={1280}
+          height={987}
+          loading="lazy"
+          decoding="async"
           style={{ y: deskY, x: pointer.x * 0.15 }}
           className="h-[130%] w-full object-cover object-[center_18%]"
         />
@@ -47,6 +51,10 @@ export function AboutStoryHero() {
           <img
             src={profile.photo}
             alt={profile.name}
+            width={900}
+            height={1200}
+            fetchPriority="high"
+            decoding="async"
             className="aspect-[4/5] w-full max-w-sm rounded-[28px] object-cover object-top shadow-[var(--shadow-lift)] ring-1 ring-white/20"
           />
         </motion.div>

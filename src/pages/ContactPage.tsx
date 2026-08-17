@@ -103,7 +103,7 @@ export function ContactPage() {
           </Button>
           {status === 'ok' ? (
             <p className="text-sm text-ok" role="status">
-              Message recorded. Connect VITE_CONTACT_ENDPOINT to deliver it to an inbox.
+              Message sent. I’ll reply by email.
             </p>
           ) : null}
           {status === 'error' ? (

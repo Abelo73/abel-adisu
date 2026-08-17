@@ -23,6 +23,9 @@ export function UpworkHeroCard() {
             <img
               src={profile.photo}
               alt={profile.name}
+              width={72}
+              height={72}
+              decoding="async"
               className="size-[4.5rem] rounded-full object-cover ring-2 ring-[#F5C14A]/70 ring-offset-2 ring-offset-bg"
             />
             <span className="absolute right-0.5 top-0.5 size-3 rounded-full bg-[#14a800] ring-2 ring-bg" aria-hidden="true" />

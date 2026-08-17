@@ -1,211 +1,47 @@
-import { useState, type FormEvent } from 'react'
 import { profile } from '@/content/profile'
-import { labItems } from '@/content/lab'
-import { Button } from '@/components/ui/Button'
-import { Container, PageIntro } from '@/components/ui/Container'
-import { contactSchema } from '@/lib/contactSchema'
-import { submitContact } from '@/lib/contactService'
-import { isConfiguredEmail, isConfiguredUrl, newTab } from '@/lib/links'
-
-const intents = [
-  'Build a backend system',
-  'Build a full-stack application',
-  'Automate a workflow',
-  'Build an AI automation system',
-  'Improve an existing application',
-  'Discuss freelance work',
-]
+import { ContactFacts } from '@/components/contact/ContactFacts'
+import { ContactForm } from '@/components/contact/ContactForm'
+import { ContactPortrait } from '@/components/contact/ContactPortrait'
+import { Container } from '@/components/ui/Container'
 
 export function ContactPage() {
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'ok' | 'error'>('idle')
-  const [errors, setErrors] = useState<Record<string, string>>({})
-  const [message, setMessage] = useState('')
-
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const form = new FormData(event.currentTarget)
-    const parsed = contactSchema.safeParse({
-      name: form.get('name'),
-      email: form.get('email'),
-      company: form.get('company') || undefined,
-      projectType: form.get('projectType'),
-      message: form.get('message'),
-    })
-    if (!parsed.success) {
-      const next: Record<string, string> = {}
-      for (const issue of parsed.error.issues) {
-        const key = String(issue.path[0])
-        if (!next[key]) next[key] = issue.message
-      }
-      setErrors(next)
-      setStatus('idle')
-      return
-    }
-    setErrors({})
-    setStatus('submitting')
-    const result = await submitContact(parsed.data)
-    if (result.ok) {
-      setStatus('ok')
-      event.currentTarget.reset()
-    } else {
-      setStatus('error')
-      setMessage(result.error)
-    }
-  }
-
   return (
-    <Container as="article" className="pb-20">
-      <PageIntro
-        eyebrow="Contact"
-        title="Have a system you want to build?"
-        lede="Pick the shape of the work, then send enough context to start a real conversation."
-      />
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
-        <form onSubmit={onSubmit} className="space-y-5" noValidate>
-          <Field label="Name" name="name" error={errors.name} autoComplete="name" />
-          <Field label="Email" name="email" type="email" error={errors.email} autoComplete="email" />
-          <Field label="Company" name="company" error={errors.company} optional autoComplete="organization" />
+    <article className="pb-24">
+      <Container>
+        <header className="grid items-end gap-8 pt-10 pb-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:pt-16">
           <div>
-            <label htmlFor="projectType" className="block text-sm font-medium">
-              Project type
-            </label>
-            <select
-              id="projectType"
-              name="projectType"
-              className="mt-2 min-h-12 w-full rounded-full border border-line bg-card px-4"
-              defaultValue=""
-            >
-              <option value="" disabled>
-                Select one
-              </option>
-              {intents.map((intent) => (
-                <option key={intent} value={intent}>
-                  {intent}
-                </option>
-              ))}
-            </select>
-            {errors.projectType ? <p className="mt-1 text-sm text-danger">{errors.projectType}</p> : null}
+            <p className="text-xs uppercase tracking-[0.22em] text-muted">Contact</p>
+            <h1 className="mt-4 font-display text-[clamp(3.4rem,10vw,7.5rem)] italic leading-[0.88] font-medium tracking-tight">
+              <span className="block">Get</span>
+              <span className="block text-muted">in touch</span>
+            </h1>
           </div>
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={6}
-              className="mt-2 w-full rounded-[24px] border border-line bg-card px-4 py-3"
-            />
-            {errors.message ? <p className="mt-1 text-sm text-danger">{errors.message}</p> : null}
-          </div>
-          <Button type="submit" disabled={status === 'submitting'}>
-            {status === 'submitting' ? 'Sending…' : 'Send message'}
-          </Button>
-          {status === 'ok' ? (
-            <p className="text-sm text-ok" role="status">
-              Message sent. I’ll reply by email.
-            </p>
-          ) : null}
-          {status === 'error' ? (
-            <p className="text-sm text-danger" role="alert">
-              {message}
-            </p>
-          ) : null}
-        </form>
-        <aside>
-          <h2 className="text-2xl font-semibold tracking-tight">Other channels</h2>
-          <ul className="mt-4 space-y-3 text-sm">
-            <li>
-              Email:{' '}
-              {isConfiguredEmail(profile.email) ? (
-                <a className="underline" href={`mailto:${profile.email}`}>
-                  {profile.email}
-                </a>
-              ) : (
-                <span className="text-muted">set EMAIL_ADDRESS in profile.ts</span>
-              )}
-            </li>
-            <li>
-              Phone:{' '}
-              <a className="underline" href={`tel:${profile.phone}`}>
-                {profile.phoneLabel}
-              </a>
-            </li>
-            <li>
-              CV:{' '}
-              <a className="underline" href={profile.cv} {...newTab}>
-                Download PDF
-              </a>
-            </li>
-            <li>
-              GitHub:{' '}
-              {isConfiguredUrl(profile.social.github) ? (
-                <a className="underline" href={profile.social.github} {...newTab}>
-                  Profile
-                </a>
-              ) : (
-                <span className="text-muted">GITHUB_PROFILE_URL</span>
-              )}
-            </li>
-            <li>
-              LinkedIn:{' '}
-              {isConfiguredUrl(profile.social.linkedin) ? (
-                <a className="underline" href={profile.social.linkedin} {...newTab}>
-                  Profile
-                </a>
-              ) : (
-                <span className="text-muted">LINKEDIN_PROFILE_URL</span>
-              )}
-            </li>
-            <li>
-              Upwork:{' '}
-              {isConfiguredUrl(profile.social.upwork) ? (
-                <a className="underline" href={profile.social.upwork} {...newTab}>
-                  Profile
-                </a>
-              ) : (
-                <span className="text-muted">UPWORK_PROFILE_URL</span>
-              )}
-            </li>
-          </ul>
-          <p className="mt-8 text-sm text-muted">
-            Currently exploring: {labItems.map((item) => item.title).slice(0, 3).join(', ')}.
+          <p className="max-w-md pb-2 text-lg leading-relaxed text-muted">
+            Have a system you want to build? Write enough context and I’ll reply. No ticket queue — just me.
           </p>
-        </aside>
-      </div>
-    </Container>
-  )
-}
+        </header>
 
-function Field({
-  label,
-  name,
-  error,
-  type = 'text',
-  optional,
-  autoComplete,
-}: {
-  label: string
-  name: string
-  error?: string
-  type?: string
-  optional?: boolean
-  autoComplete?: string
-}) {
-  return (
-    <div>
-      <label htmlFor={name} className="block text-sm font-medium">
-        {label}
-        {optional ? <span className="text-muted"> (optional)</span> : null}
-      </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        autoComplete={autoComplete}
-        className="mt-2 min-h-12 w-full rounded-full border border-line bg-card px-4"
-      />
-      {error ? <p className="mt-1 text-sm text-danger">{error}</p> : null}
-    </div>
+        <section className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+          <ContactPortrait />
+          <div>
+            <ContactFacts />
+            <p className="mt-6 text-sm text-muted">{profile.availability}</p>
+          </div>
+        </section>
+      </Container>
+
+      <Container className="mt-20">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-muted">Write</p>
+            <h2 className="mt-3 font-display text-4xl italic leading-tight md:text-5xl">Tell me about the work</h2>
+            <p className="mt-4 max-w-md text-muted">
+              Name, email, and enough of the problem that I can answer as a person — not a form bot.
+            </p>
+          </div>
+          <ContactForm />
+        </div>
+      </Container>
+    </article>
   )
 }

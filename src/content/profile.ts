@@ -26,6 +26,13 @@ export const profile = {
   ],
   summary:
     'Currently Software Engineer at Atlas Computer Technology in Addis Ababa — Java, Spring Boot, React, on-site in production. Select Upwork work on the side.',
+  hero: {
+    eyebrow: 'Hello — I’m Abel.',
+    title: 'I write software people can finish at work.',
+    lede: 'Software engineer at Atlas Computer Technology in Addis Ababa. I build the backend, the UI, and the path into production.',
+    primaryCta: 'Work with me',
+    skills: ['Java', 'Spring Boot', 'React', 'TypeScript', 'PostgreSQL'],
+  },
   status: 'LIVE · ATLAS COMPUTER TECHNOLOGY',
   signal: 'ATLAS · PRODUCTION · ADDIS ABABA',
   locationLabel: 'Addis Ababa, Ethiopia',

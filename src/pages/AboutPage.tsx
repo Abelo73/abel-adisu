@@ -150,8 +150,11 @@ export function AboutPage() {
 
         <Reveal>
           <div className="flex flex-wrap gap-3 pt-8">
-            <Button href={profile.cv}>Download CV</Button>
-            <Button to="/contact" variant="secondary">
+            <Button to="/journey">The path that wasn’t straight</Button>
+            <Button href={profile.cv} variant="secondary">
+              Download CV
+            </Button>
+            <Button to="/contact" variant="ghost">
               Have a system you want to build?
             </Button>
           </div>

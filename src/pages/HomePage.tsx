@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { profile } from '@/content/profile'
 import { StoryHero } from '@/components/hero/StoryHero'
 import { StackWorkflow } from '@/components/architecture/StackWorkflow'
 import { ScopePath } from '@/components/home/ScopePath'
@@ -8,7 +7,7 @@ import { WorkflowViz } from '@/components/automation/WorkflowViz'
 import { ClientStories } from '@/components/home/ClientStories'
 import { WorkStage } from '@/components/work/WorkStage'
 import { ServicePath } from '@/components/services/ServicePath'
-import { Button } from '@/components/ui/Button'
+import { HireBoard } from '@/components/home/HireBoard'
 import { Container } from '@/components/ui/Container'
 import { Reveal } from '@/components/ui/Reveal'
 
@@ -92,36 +91,7 @@ export function HomePage() {
       <section className="pb-28 pt-8">
         <Container>
           <Reveal>
-            <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
-              <img
-                src={profile.photo}
-                alt={profile.name}
-                width={900}
-                height={1200}
-                loading="lazy"
-                decoding="async"
-                className="aspect-[4/5] w-full max-w-sm rounded-[28px] object-cover shadow-[var(--shadow-lift)]"
-              />
-              <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-muted">Hire</p>
-                <h2 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">
-                  Hire for a system, not a ticket
-                </h2>
-                <p className="mt-4 max-w-xl text-muted">
-                  {profile.current.role} at {profile.current.org}. Open to select full-stack, backend, and frontend
-                  work. CV is the same record as this site.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Button to="/contact">Have a system you want to build?</Button>
-                  <Button href={profile.cv} variant="secondary">
-                    Download CV
-                  </Button>
-                  <Button to="/services" variant="ghost">
-                    Services
-                  </Button>
-                </div>
-              </div>
-            </div>
+            <HireBoard />
           </Reveal>
         </Container>
       </section>

@@ -33,6 +33,9 @@ const UpworkPage = lazy(() => import('@/pages/UpworkPage').then((m) => ({ defaul
 const ContactPage = lazy(() =>
   import('@/pages/ContactPage').then((m) => ({ default: m.ContactPage })),
 )
+const JourneyPage = lazy(() =>
+  import('@/pages/JourneyPage').then((m) => ({ default: m.JourneyPage })),
+)
 const LabPage = lazy(() => import('@/pages/LabPage').then((m) => ({ default: m.LabPage })))
 const NotFoundPage = lazy(() =>
   import('@/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })),
@@ -68,6 +71,7 @@ export const router = createBrowserRouter([
       { path: 'case-studies/:slug', element: wrap(<CaseStudyDetailPage />) },
       { path: 'upwork', element: wrap(<UpworkPage />) },
       { path: 'contact', element: wrap(<ContactPage />) },
+      { path: 'journey', element: wrap(<JourneyPage />) },
       { path: 'lab', element: wrap(<LabPage />) },
       { path: '*', element: wrap(<NotFoundPage />) },
     ],

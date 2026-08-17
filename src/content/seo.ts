@@ -20,6 +20,12 @@ export const seoByPath: Record<string, SeoConfig> = {
     description: 'From database to UI: Atlas Computer Technology, Upwork, and the systems Abel actually ships.',
     path: '/about',
   },
+  '/journey': {
+    title: 'Journey — Abel Adisu',
+    description:
+      'From Electrical & Computer Engineering at Wollega to software engineering at Atlas — a path that was not a straight line.',
+    path: '/journey',
+  },
   '/experience': {
     title: 'Experience — Abel Adisu',
     description: 'Currently Software Engineer at Atlas Computer Technology. QA first, then the engineer seat — plus independent Upwork work.',

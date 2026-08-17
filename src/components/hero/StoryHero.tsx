@@ -43,23 +43,23 @@ export function StoryHero() {
 
         <div className="mt-14 grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
           <motion.div style={{ y: copyY }}>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted">{profile.status}</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-muted">{profile.hero.eyebrow}</p>
             <h1 className="mt-4 font-display text-[clamp(2.5rem,5.4vw,4.4rem)] italic leading-[1.05] font-medium">
-              Currently shipping production systems.
+              {profile.hero.title}
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-muted">{profile.summary}</p>
+            <p className="mt-6 max-w-xl text-lg text-muted">{profile.hero.lede}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button to="/experience">Current role</Button>
               <Button to="/contact" variant="secondary">
-                Hire Abel
+                {profile.hero.primaryCta}
               </Button>
             </div>
             <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
               <li>
                 {profile.current.role} · {profile.current.org}
               </li>
-              {profile.badges.map((badge) => (
-                <li key={badge}>{badge}</li>
+              {profile.hero.skills.map((skill) => (
+                <li key={skill}>{skill}</li>
               ))}
             </ul>
           </motion.div>

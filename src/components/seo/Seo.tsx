@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { absoluteUrl, defaultSeo, jsonLdPerson, seoByPath } from '@/content/seo'
+import { profile } from '@/content/profile'
 import { getProject } from '@/content/projects'
 import { getService } from '@/content/services'
 import { getCaseStudy, caseStudyProject } from '@/content/caseStudies'
@@ -61,6 +62,7 @@ export function Seo() {
     upsertMeta('property', 'og:description', description)
     upsertMeta('property', 'og:type', 'website')
     upsertMeta('property', 'og:url', absoluteUrl(path))
+    upsertMeta('property', 'og:image', absoluteUrl(profile.photo))
     upsertMeta('name', 'twitter:card', 'summary_large_image')
     upsertMeta('name', 'twitter:title', title)
     upsertMeta('name', 'twitter:description', description)

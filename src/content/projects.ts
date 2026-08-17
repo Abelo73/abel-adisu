@@ -25,6 +25,8 @@ export type Project = {
   kind: 'shipped-work'
   category: ProjectCategory
   image: string
+  detailImage?: string
+  coverKind?: 'board' | 'screen'
   summary: string
   problem: string
   context: string
@@ -51,15 +53,16 @@ export const projects: Project[] = [
     title: 'Art Information Center',
     kind: 'shipped-work',
     category: 'fullstack',
-    image: '/work/art-information-center.png',
+    image: '/art-information-center-case-study.png',
+    detailImage: '/work/art-information-center.png',
     summary:
-      'Full-stack admin platform for an arts community: discover feed, Stripe payments, and consoles for users, grants, sponsors, and events.',
+      'Live Upwork product: arts-community platform at artinformationcenter.com — discover feed, profiles, Stripe payments, grants, sponsors, and events.',
     problem:
       'An arts organization needed one place to run discovery, membership payments, and back-office work instead of scattered tools.',
     context:
-      'Upwork engagement. React client on Supabase (Postgres, Auth, Storage) with Stripe for profile payments and a transaction ledger.',
+      'Upwork client work, now in production. React on Supabase (Postgres, Auth, Storage) with Stripe for profile payments and a transaction ledger.',
     solution:
-      'A typed React admin: drag-to-reorder feeds, Stripe-backed payments, Gmail where mail has to leave the building, OpenAI where it helps classify — not invent facts.',
+      'A typed React product: public Discover grid, drag-to-reorder feeds, Stripe-backed payments, Gmail where mail has to leave the building, OpenAI where it helps classify — not invent facts.',
     architecture: {
       caption: 'Browser, Supabase, Stripe, and mail.',
       nodes: [
@@ -91,55 +94,58 @@ export const projects: Project[] = [
     ],
     technologies: ['React', 'Supabase', 'Stripe', 'shadcn/ui', 'PostgreSQL', 'OpenAI API', 'Gmail API'],
     outcome:
-      'A running arts-community admin: feed, payments, and back office in one surface. Screenshots on this site are representative UI frames, not live production captures.',
+      'Live at artinformationcenter.com — a running arts-community product: Discover, profiles, payments, and back office on one surface.',
     lessons: [
       'Admin software is the product. If staff cannot reorder a list, the public feed does not matter.',
     ],
     related: ['medicare', 'ijcms'],
+    demo: 'https://artinformationcenter.com/',
   },
   {
     slug: 'itas-risk-studio',
     title: 'ITAS Risk Studio',
     kind: 'shipped-work',
-    category: 'backend',
+    category: 'fullstack',
     image: '/work/itas-risk-studio.png',
+    coverKind: 'screen',
     summary:
-      'Tax risk engine for a revenue authority. Java. Dense operational UI: cases, scores, and the tables people work all day.',
+      'Angular risk console for a tax administration engine. Taxpayer scores, fraud-risk flags, and case drill-downs on Java Spring Boot services.',
     problem:
-      'Revenue work needs a risk view that operators can filter, open, and act on — not a slide about “analytics.”',
+      'Caseworkers need the risk score on screen — not a model notebook. If the flag is not in the queue, it does not get worked.',
     context:
-      'Built in a revenue-authority setting. Java backend. Light, data-heavy interface for case work.',
+      'Frontend / UI on ITAS for the Ministry of Revenue. Angular dashboards talking to Java Spring Boot microservices and an AI/R scoring model.',
     solution:
-      'A risk studio: sidebar navigation, case tables, scores, and workflows that match how tax officers actually move through a queue.',
+      'Risk-profile views, filters, and case drill-downs that surface model output without re-implementing tax rules in the browser.',
     architecture: {
-      caption: 'Operators, risk services, and the system of record.',
+      caption: 'Angular console, Spring services, scoring model.',
       nodes: [
-        { id: 'ui', label: 'Risk console', detail: 'Tables, filters, case detail.', x: 50, y: 12 },
-        { id: 'api', label: 'Java services', detail: 'Scoring, case lifecycle, auth.', x: 50, y: 42 },
-        { id: 'db', label: 'Relational data', detail: 'Taxpayer and case records.', x: 50, y: 72 },
+        { id: 'ui', label: 'Angular console', detail: 'Risk profiles, filters, case drill-down.', x: 50, y: 12 },
+        { id: 'api', label: 'Java services', detail: 'Taxpayer and case APIs.', x: 50, y: 42 },
+        { id: 'score', label: 'Risk model', detail: 'AI / R scores consumed over REST.', x: 50, y: 72 },
       ],
       edges: [
         { from: 'ui', to: 'api' },
-        { from: 'api', to: 'db' },
+        { from: 'api', to: 'score' },
       ],
     },
     decisions: [
-      'Optimize for table work, not dashboards that nobody opens twice.',
-      'Keep scoring logic on the server. The UI displays a decision, it does not re-implement tax rules.',
+      'The UI displays a decision. It does not re-score the taxpayer.',
+      'Reusable Angular components for profile, filter, and drill-down — same language across the queue.',
     ],
     implementation: [
-      'Java services for risk and case flow.',
-      'Operator console with filters and status chips.',
+      'Angular dashboards for fraud-risk scores and risk-tier flags.',
+      'REST integration with multiple Spring Boot microservices.',
+      'Worked with the data/AI team to surface R-generated scores in the console.',
     ],
     challenges: [
       {
-        challenge: 'Correctness under messy legacy data.',
-        approach: 'Validate at the boundary. Fail visibly. Do not hide bad rows behind a pretty chart.',
+        challenge: 'Model output arriving in a shape operators cannot act on.',
+        approach: 'Map scores to tiers and flags the queue already understands. Fail visibly when a score is missing.',
       },
     ],
-    technologies: ['Java', 'Spring Boot', 'REST APIs', 'PostgreSQL', 'MySQL'],
+    technologies: ['Angular', 'TypeScript', 'Java Spring Boot', 'REST APIs', 'PostgreSQL'],
     outcome:
-      'A risk console shaped for revenue operations. No invented case volumes or recovery figures.',
+      'A risk console shaped for casework. No invented case volumes or recovery figures.',
     lessons: [
       'Government software is judged by whether a clerk can finish a case, not by the hero animation.',
     ],
@@ -150,7 +156,8 @@ export const projects: Project[] = [
     title: 'MediCare',
     kind: 'shipped-work',
     category: 'fullstack',
-    image: '/work/medicare.png',
+    image: '/medicare-hms-case-study.png',
+    detailImage: '/work/medicare.png',
     summary:
       'Hospital management system. Java Spring Boot and React. Operations dashboard: queues, occupancy, appointments.',
     problem:
@@ -198,7 +205,8 @@ export const projects: Project[] = [
     title: 'IJCMS',
     kind: 'shipped-work',
     category: 'backend',
-    image: '/work/ijcms.png',
+    image: '/ijcms-justice-platform-case-study.png',
+    detailImage: '/work/ijcms.png',
     summary:
       'Integrated Justice Case Management System. Java Spring Boot platform for case files, stages, and documents.',
     problem:
@@ -237,6 +245,54 @@ export const projects: Project[] = [
       'A justice case platform oriented around the file, not around a generic CRM.',
     lessons: [
       'Legal ops software is a filing cabinet with a state machine. Design both.',
+    ],
+    related: ['itas-risk-studio', 'medicare'],
+  },
+  {
+    slug: 'workforce',
+    title: 'Workforce',
+    kind: 'shipped-work',
+    category: 'fullstack',
+    image: '/workforce-angular-case-study.png',
+    summary:
+      'Enterprise workforce operations in Angular: employees, departments, tasks, attendance, and a dashboard operators can run.',
+    problem:
+      'Workforce admin that still feels like a legacy console — slow routes, scattered lists, no one picture of the day.',
+    context:
+      'Angular UI redesign of an operations suite. TypeScript, signals, RxJS.',
+    solution:
+      'A single workspace: dashboard, employees, departments, projects, tasks, and the HR exceptions that actually block the day.',
+    architecture: {
+      caption: 'Angular workspace on operational APIs.',
+      nodes: [
+        { id: 'ui', label: 'Angular workspace', detail: 'Dashboard, employees, tasks.', x: 50, y: 12 },
+        { id: 'api', label: 'Operations API', detail: 'People, departments, work items.', x: 50, y: 42 },
+        { id: 'db', label: 'Records', detail: 'Attendance, leave, assignments.', x: 50, y: 72 },
+      ],
+      edges: [
+        { from: 'ui', to: 'api' },
+        { from: 'api', to: 'db' },
+      ],
+    },
+    decisions: [
+      'One sidebar, one workspace. Operators should not hunt across apps for a blocked task.',
+      'Dashboard numbers come from the same records as the lists — no decorative KPIs.',
+    ],
+    implementation: [
+      'Angular workspace with dashboard, employees, departments, and tasks.',
+      'Typed views for workload and HR review queues.',
+    ],
+    challenges: [
+      {
+        challenge: 'An operations UI that looks modern but still hides blocked work.',
+        approach: 'Surface blocked tasks and HR review as first-class queues, not badge counts.',
+      },
+    ],
+    technologies: ['Angular', 'TypeScript', 'RxJS'],
+    outcome:
+      'An operations surface rebuilt in Angular. Screenshots are representative frames of the product language.',
+    lessons: [
+      'Workforce software is judged by whether a manager can unblock a person today.',
     ],
     related: ['itas-risk-studio', 'medicare'],
   },

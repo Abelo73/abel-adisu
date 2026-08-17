@@ -15,7 +15,7 @@ export function UpworkPage() {
         lede={`${upworkProof.badge}. ${upworkProof.jobSuccess} Job Success. Two written 5.0 reviews and three completed Spring Boot jobs from the public Upwork profile.`}
       />
       <div className="glass mb-12 flex flex-col gap-5 rounded-[28px] p-6 sm:flex-row sm:items-center">
-        <img src={profile.photo} alt="" className="size-16 rounded-full object-cover ring-2 ring-[#F5C14A]/60" />
+        <img src={profile.photo} alt={profile.name} className="size-16 rounded-full object-cover ring-2 ring-[#F5C14A]/60" />
         <div className="flex-1">
           <p className="flex gap-1" aria-label="Five stars on Upwork">
             {Array.from({ length: 5 }, (_, i) => (

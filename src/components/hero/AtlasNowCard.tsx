@@ -24,8 +24,8 @@ export function AtlasNowCard() {
         <div className="mt-6 flex items-start gap-4">
           <img
             src={profile.photo}
-            alt=""
-            className="size-[4.5rem] rounded-full object-cover ring-2 ring-ok/50 ring-offset-2 ring-offset-bg"
+            alt={profile.name}
+            className="size-[4.5rem] rounded-full object-cover object-top ring-2 ring-ok/50 ring-offset-2 ring-offset-bg"
           />
           <div className="min-w-0">
             <p className="text-[0.65rem] uppercase tracking-[0.18em] text-muted">{current.workMode}</p>

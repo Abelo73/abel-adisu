@@ -27,6 +27,11 @@ export const caseStudies: CaseStudy[] = [
     projectSlug: 'art-information-center',
     thesis: 'Stripe is the ledger. The admin is how staff actually run the community.',
   },
+  {
+    slug: 'workforce-ops',
+    projectSlug: 'workforce',
+    thesis: 'Workforce software is a queue of blocked people. The dashboard has to show that, not hide it.',
+  },
 ]
 
 export function getCaseStudy(slug: string) {

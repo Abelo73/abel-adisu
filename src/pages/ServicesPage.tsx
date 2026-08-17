@@ -1,39 +1,21 @@
-import { Link } from 'react-router-dom'
-import { services } from '@/content/services'
+import { ServicePath } from '@/components/services/ServicePath'
 import { Button } from '@/components/ui/Button'
 import { Container, PageIntro } from '@/components/ui/Container'
-import { GlassCard } from '@/components/ui/Reveal'
+import { Reveal } from '@/components/ui/Reveal'
 
 export function ServicesPage() {
   return (
-    <Container as="article" className="pb-20">
-      <PageIntro
-        eyebrow="Services"
-        title="Engagements with a system on the other side."
-        lede="No public rate card. If the work is a fit, we discuss requirements, constraints, and a definition of done."
-      />
-      <ul className="grid gap-4">
-        {services.map((service) => (
-          <li key={service.slug}>
-            <GlassCard className="p-6">
-              <p className="text-xs uppercase tracking-[0.16em] text-muted">{service.eyebrow}</p>
-              <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-                <Link to={`/services/${service.slug}`} className="hover:underline">
-                  {service.title}
-                </Link>
-              </h2>
-              <p className="mt-3 max-w-3xl text-muted">{service.summary}</p>
-              <Link
-                to={`/services/${service.slug}`}
-                className="mt-4 inline-flex min-h-12 items-center text-sm underline-offset-4 hover:underline"
-              >
-                Scope, process, and stack
-              </Link>
-            </GlassCard>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-12">
+    <Container as="article" className="pb-24">
+      <Reveal>
+        <PageIntro
+          eyebrow="Services"
+          title="The path from a brief to a running system."
+          lede="Walk the path. Each stop is an engagement — the note stays in full view, with the problem, the stack, and how the work actually runs."
+        />
+      </Reveal>
+      <ServicePath />
+      <p className="mt-4 text-sm text-muted lg:hidden">Tap a stop on the path to open its note.</p>
+      <div className="mt-14">
         <Button to="/contact">Let’s discuss your requirements</Button>
       </div>
     </Container>

@@ -18,6 +18,11 @@ export function SiteFooter() {
             </Link>
           </li>
           <li>
+            <a href={profile.cv} className="underline-offset-4 hover:underline" {...newTab}>
+              CV
+            </a>
+          </li>
+          <li>
             <Link to="/contact" className="underline-offset-4 hover:underline">
               Contact
             </Link>

@@ -147,14 +147,20 @@ body {
   transform: rotate(45deg);
 }
 
-@media (min-width: 64rem) {
-  .speech-bubble[data-side='right']::before {
-    left: auto;
-    right: -5px;
-    border: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
-    border-left: 0;
-    border-bottom: 0;
-  }
+.speech-bubble[data-side='right']::before {
+  left: auto;
+  right: -5px;
+  border: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
+  border-left: 0;
+  border-bottom: 0;
+}
+
+.speech-bubble[data-caret='none'] {
+  padding: 1.5rem 1.75rem;
+}
+
+.speech-bubble[data-caret='none']::before {
+  display: none;
 }
 
 .story-gradient {
@@ -197,6 +203,25 @@ body {
 
 .float-enabled .float-card {
   animation: float-card 5.5s ease-in-out infinite;
+}
+
+.work-stage {
+  perspective: 1800px;
+  perspective-origin: 58% 40%;
+}
+
+.work-stage-inner {
+  transform-style: preserve-3d;
+}
+
+.work-pane {
+  transform-style: preserve-3d;
+}
+
+@media (min-width: 1024px) {
+  .work-pane[data-tilt='true'] {
+    transform: rotateY(var(--ry)) rotateX(var(--rx));
+  }
 }
 
 .workflow-board {

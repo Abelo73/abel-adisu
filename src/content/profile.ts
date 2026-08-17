@@ -30,8 +30,10 @@ export const profile = {
   signal: 'ATLAS · PRODUCTION · ADDIS ABABA',
   locationLabel: 'Addis Ababa, Ethiopia',
   years: '6 years in production',
-  education: 'B.Sc., Wollega University, 2019–2023',
+  education: 'B.Sc. Electrical & Computer Engineering, Wollega University, 2019–2023',
   email: 'abeladisu73@gmail.com',
+  phone: '+251934777843',
+  phoneLabel: '+251 934 777 843',
   employer: 'Atlas Computer Technology',
   current: {
     org: 'Atlas Computer Technology',
@@ -40,7 +42,7 @@ export const profile = {
     location: 'Addis Ababa, Ethiopia',
     workMode: 'On-site',
     env: 'Production',
-    stack: ['Java', 'Spring Boot', 'React', 'Keycloak', 'Kafka', 'PostgreSQL'],
+    stack: ['Java', 'Spring Boot', 'Angular', 'React', 'Keycloak', 'Kafka', 'PostgreSQL'],
   },
   availability: 'Employed at Atlas. Open to select full-stack, backend, and frontend work — on-site, hybrid, or remote.',
   social: {
@@ -49,8 +51,10 @@ export const profile = {
     upwork: 'https://www.upwork.com/freelancers/~01e478e25e9d736c67',
   },
   badges: ['Top Rated', '100% Job Success'],
-  photo: '/abel-adisu.png',
-  topSkills: ['Java', 'Spring Boot', 'Keycloak', 'Apache Kafka', 'Supabase'],
+  photo: '/abel-adisu.jpg',
+  deskPhoto: '/abel-at-desk.jpg',
+  cv: '/Abel_Adisu_CV.pdf',
+  topSkills: ['Java', 'Spring Boot', 'Angular', 'React', 'Apache Kafka'],
   layers: [
     {
       id: 'ui',
@@ -92,6 +96,7 @@ export const profile = {
     { title: 'Justice case management', hint: 'Government casework, not a demo.' },
     { title: 'Real-time tax risk scoring', hint: 'Revenue operations that have to be correct.' },
     { title: 'Hospital operations', hint: 'Software a clinic can actually run.' },
+    { title: 'Workforce operations', hint: 'An Angular suite operators can run.' },
     { title: 'Multi-tenant SaaS', hint: 'Production client environments.' },
   ],
   focus: [

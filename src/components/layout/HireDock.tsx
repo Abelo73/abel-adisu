@@ -7,8 +7,8 @@ export function HireDock() {
       <div className="pointer-events-auto glass flex max-w-xl items-center gap-3 rounded-full px-3 py-2 pl-2">
         <img
           src={profile.photo}
-          alt=""
-          className="size-10 rounded-full object-cover ring-2 ring-ok/40"
+          alt={profile.name}
+          className="size-10 rounded-full object-cover object-top ring-2 ring-ok/40"
         />
         <p className="hidden min-w-0 text-sm sm:block">At Atlas. Open to select work.</p>
         <Button to="/contact" className="min-h-10 px-4">

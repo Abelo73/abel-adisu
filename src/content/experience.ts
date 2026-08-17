@@ -31,6 +31,7 @@ export const experience: ExperienceItem[] = [
       'Java',
       'Spring Boot',
       'React',
+      'Angular',
       'Vite',
       'shadcn/ui',
       'Camunda',

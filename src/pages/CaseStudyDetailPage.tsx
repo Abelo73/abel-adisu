@@ -3,6 +3,7 @@ import { caseStudyProject, getCaseStudy } from '@/content/caseStudies'
 import { ArchitectureGraph } from '@/components/architecture/ArchitectureGraph'
 import { Button } from '@/components/ui/Button'
 import { Container, PageIntro } from '@/components/ui/Container'
+import { ProjectCover } from '@/components/work/ProjectCover'
 
 export function CaseStudyDetailPage() {
   const { slug } = useParams()
@@ -18,6 +19,12 @@ export function CaseStudyDetailPage() {
         </Link>
       </p>
       <PageIntro eyebrow="Case study" title={project.title} lede={study.thesis} />
+      <ProjectCover
+        src={project.image}
+        alt={`${project.title} overview`}
+        kind={project.coverKind}
+        className="mb-12"
+      />
       <ol className="grid gap-8 md:grid-cols-2">
         <li>
           <h2 className="text-2xl font-semibold tracking-tight">Problem</h2>

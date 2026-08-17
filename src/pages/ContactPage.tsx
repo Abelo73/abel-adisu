@@ -126,6 +126,18 @@ export function ContactPage() {
               )}
             </li>
             <li>
+              Phone:{' '}
+              <a className="underline" href={`tel:${profile.phone}`}>
+                {profile.phoneLabel}
+              </a>
+            </li>
+            <li>
+              CV:{' '}
+              <a className="underline" href={profile.cv} {...newTab}>
+                Download PDF
+              </a>
+            </li>
+            <li>
               GitHub:{' '}
               {isConfiguredUrl(profile.social.github) ? (
                 <a className="underline" href={profile.social.github} {...newTab}>

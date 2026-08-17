@@ -1,5 +1,13 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
+import { motion } from 'motion/react'
 import { backendServiceGraph } from '@/content/architecture'
+import { coreWorkflow } from '@/content/automation'
+import { getService } from '@/content/services'
+import { ArchitectureGraph } from '@/components/architecture/ArchitectureGraph'
+import { WorkflowViz } from '@/components/automation/WorkflowViz'
+import { Button } from '@/components/ui/Button'
+import { Container, PageIntro } from '@/components/ui/Container'
+import { useReducedMotion } from '@/hooks/useMedia'
 import { coreWorkflow } from '@/content/automation'
 import { getService } from '@/content/services'
 import { ArchitectureGraph } from '@/components/architecture/ArchitectureGraph'
@@ -10,6 +18,7 @@ import { Container, PageIntro } from '@/components/ui/Container'
 export function ServiceDetailPage() {
   const { slug } = useParams()
   const service = slug ? getService(slug) : undefined
+  const reduced = useReducedMotion()
   if (!service) return <Navigate to="/services" replace />
 
   return (
@@ -59,10 +68,17 @@ export function ServiceDetailPage() {
         <h2 className="text-2xl font-semibold tracking-tight">Process</h2>
         <ol className="mt-4 space-y-3">
           {service.process.map((step, index) => (
-            <li key={step} className="flex gap-4 text-muted">
+            <motion.li
+              key={step}
+              className="flex gap-4 text-muted"
+              initial={reduced ? false : { opacity: 0, x: -12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: reduced ? 0 : index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+            >
               <span className="font-mono text-xs text-fg">{String(index + 1).padStart(2, '0')}</span>
               {step}
-            </li>
+            </motion.li>
           ))}
         </ol>
       </section>

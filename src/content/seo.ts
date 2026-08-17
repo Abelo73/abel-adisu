@@ -83,12 +83,14 @@ export function jsonLdPerson() {
       '@type': 'Organization',
       name: profile.current.org,
     },
+    image: absoluteUrl(profile.photo),
+    telephone: profile.phone,
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Addis Ababa',
       addressCountry: 'ET',
     },
     sameAs: [profile.social.github, profile.social.linkedin, profile.social.upwork],
-    knowsAbout: ['Java', 'Spring Boot', 'React', 'TypeScript', 'Keycloak', 'Kafka', 'Supabase', 'n8n'],
+    knowsAbout: ['Java', 'Spring Boot', 'Angular', 'React', 'TypeScript', 'Keycloak', 'Kafka', 'Supabase', 'n8n'],
   }
 }

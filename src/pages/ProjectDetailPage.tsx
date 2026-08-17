@@ -4,6 +4,7 @@ import { ArchitectureGraph } from '@/components/architecture/ArchitectureGraph'
 import { Button } from '@/components/ui/Button'
 import { Container, PageIntro } from '@/components/ui/Container'
 import { isConfiguredUrl, newTab } from '@/lib/links'
+import { ProjectCover } from '@/components/work/ProjectCover'
 
 export function ProjectDetailPage() {
   const { slug } = useParams()
@@ -20,11 +21,20 @@ export function ProjectDetailPage() {
       </p>
       <PageIntro eyebrow={project.kind.replace('-', ' ')} title={project.title} lede={project.summary} />
 
-      <img
+      <ProjectCover
         src={project.image}
-        alt=""
-        className="mb-12 aspect-[16/9] w-full rounded-[24px] border border-line object-cover shadow-[var(--shadow-lift)]"
+        alt={`${project.title} overview`}
+        kind={project.coverKind}
+        className={project.detailImage ? 'mb-6' : 'mb-12'}
       />
+      {project.detailImage ? (
+        <ProjectCover
+          src={project.detailImage}
+          alt={`${project.title} interface`}
+          kind="screen"
+          className="mb-12"
+        />
+      ) : null}
 
       <dl className="grid gap-8 md:grid-cols-2">
         <div>
@@ -102,8 +112,13 @@ export function ProjectDetailPage() {
           Screenshots belong here when they exist. This study does not invent usage numbers.
         </p>
         {project.github && isConfiguredUrl(project.github) ? (
-          <a href={project.github} {...newTab} className="mt-3 inline-flex min-h-12 items-center underline">
+          <a href={project.github} {...newTab} className="mt-3 mr-4 inline-flex min-h-12 items-center underline">
             GitHub
+          </a>
+        ) : null}
+        {project.demo && isConfiguredUrl(project.demo) ? (
+          <a href={project.demo} {...newTab} className="mt-3 inline-flex min-h-12 items-center underline">
+            Live site
           </a>
         ) : null}
       </section>
@@ -132,8 +147,13 @@ export function ProjectDetailPage() {
         </section>
       ) : null}
 
-      <div className="mt-12">
-        <Button to="/contact">Discuss a related system</Button>
+      <div className="mt-12 flex flex-wrap gap-3">
+        {project.demo && isConfiguredUrl(project.demo) ? (
+          <Button href={project.demo}>Open live site</Button>
+        ) : null}
+        <Button to="/contact" variant={project.demo ? 'secondary' : 'primary'}>
+          Discuss a related system
+        </Button>
       </div>
     </Container>
   )

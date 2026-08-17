@@ -8,9 +8,9 @@ export function HireDock() {
         <img
           src={profile.photo}
           alt=""
-          className="size-10 rounded-full object-cover ring-1 ring-white/20"
+          className="size-10 rounded-full object-cover ring-2 ring-ok/40"
         />
-        <p className="hidden text-sm sm:block">Abel is available for hire.</p>
+        <p className="hidden min-w-0 text-sm sm:block">At Atlas. Open to select work.</p>
         <Button to="/contact" className="min-h-10 px-4">
           Hire Abel
         </Button>

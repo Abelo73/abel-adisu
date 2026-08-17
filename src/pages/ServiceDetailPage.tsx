@@ -22,7 +22,7 @@ export function ServiceDetailPage() {
       <PageIntro eyebrow={service.eyebrow} title={service.title} lede={service.summary} />
 
       {service.slug === 'backend-development' ? (
-        <div className="mb-12 max-w-xl">
+        <div className="mb-12">
           <ArchitectureGraph
             title="Click a node"
             nodes={[...backendServiceGraph.nodes]}
@@ -33,7 +33,7 @@ export function ServiceDetailPage() {
 
       {service.slug === 'n8n-automation' ? (
         <div className="mb-12">
-          <WorkflowViz title="n8n automation shape" steps={coreWorkflow} />
+          <WorkflowViz title="One run through n8n" steps={coreWorkflow} />
         </div>
       ) : null}
 

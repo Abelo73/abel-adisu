@@ -7,9 +7,9 @@ export type SeoConfig = {
 }
 
 export const defaultSeo: SeoConfig = {
-  title: 'Abel Adisu — Full-Stack Software Engineer | Java, Spring Boot, React & AI Automation',
+  title: 'Abel Adisu — Software Engineer at Atlas Computer Technology',
   description:
-    'Abel Adisu builds production-grade backend systems, modern web applications, cloud infrastructure, and AI-powered automation with n8n.',
+    'Currently Software Engineer at Atlas Computer Technology in Addis Ababa. Java, Spring Boot, React, Keycloak, Kafka — production systems, plus select Upwork work.',
   path: '/',
 }
 
@@ -22,7 +22,7 @@ export const seoByPath: Record<string, SeoConfig> = {
   },
   '/experience': {
     title: 'Experience — Abel Adisu',
-    description: 'QA into Software Engineer at Atlas Computer Technology, plus independent Upwork work.',
+    description: 'Currently Software Engineer at Atlas Computer Technology. QA first, then the engineer seat — plus independent Upwork work.',
     path: '/experience',
   },
   '/skills': {
@@ -76,10 +76,19 @@ export function jsonLdPerson() {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: profile.name,
-    jobTitle: profile.role,
+    jobTitle: profile.current.role,
     email: profile.email,
     url: SITE_URL,
+    worksFor: {
+      '@type': 'Organization',
+      name: profile.current.org,
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Addis Ababa',
+      addressCountry: 'ET',
+    },
     sameAs: [profile.social.github, profile.social.linkedin, profile.social.upwork],
-    knowsAbout: ['Java', 'Spring Boot', 'React', 'TypeScript', 'Kubernetes', 'n8n', 'AI automation'],
+    knowsAbout: ['Java', 'Spring Boot', 'React', 'TypeScript', 'Keycloak', 'Kafka', 'Supabase', 'n8n'],
   }
 }

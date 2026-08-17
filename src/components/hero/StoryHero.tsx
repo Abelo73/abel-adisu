@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from 'motion/react'
 import { profile } from '@/content/profile'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
-import { UpworkHeroCard } from '@/components/hero/UpworkHeroCard'
+import { AtlasNowCard } from '@/components/hero/AtlasNowCard'
 import { usePointerParallax } from '@/hooks/useParallax'
 import { useReducedMotion } from '@/hooks/useMedia'
 
@@ -18,7 +18,7 @@ export function StoryHero() {
     <section className="relative overflow-hidden pb-8 pt-10">
       <div className="pointer-events-none absolute left-1/2 top-6 w-[140%] -translate-x-1/2" aria-hidden="true">
         <motion.p className="watermark text-center text-[18vw] leading-none" style={{ y: watermarkY, x: pointer.x * 0.4 }}>
-          ADISU
+          ATLAS
         </motion.p>
       </div>
       <motion.div
@@ -35,22 +35,29 @@ export function StoryHero() {
       <Container className="relative">
         <div className="flex items-start justify-between gap-6 text-xs uppercase tracking-[0.22em] text-muted">
           <span>{profile.locationLabel}</span>
-          <span>Upwork · Top Rated</span>
+          <span className="inline-flex items-center gap-2 text-ok">
+            <span className="live-dot size-1.5 rounded-full bg-ok" aria-hidden="true" />
+            Currently at Atlas
+          </span>
         </div>
 
         <div className="mt-14 grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
           <motion.div style={{ y: copyY }}>
-            <h1 className="font-display text-[clamp(2.5rem,5.4vw,4.4rem)] italic leading-[1.05] font-medium">
-              Engineering starts with systems.
+            <p className="text-xs uppercase tracking-[0.2em] text-muted">{profile.status}</p>
+            <h1 className="mt-4 font-display text-[clamp(2.5rem,5.4vw,4.4rem)] italic leading-[1.05] font-medium">
+              Currently shipping production systems.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted">{profile.summary}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button to="/contact">Hire Abel</Button>
-              <Button href={profile.social.upwork} variant="secondary">
-                Upwork profile
+              <Button to="/experience">Current role</Button>
+              <Button to="/contact" variant="secondary">
+                Hire Abel
               </Button>
             </div>
             <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
+              <li>
+                {profile.current.role} · {profile.current.org}
+              </li>
               {profile.badges.map((badge) => (
                 <li key={badge}>{badge}</li>
               ))}
@@ -58,7 +65,7 @@ export function StoryHero() {
           </motion.div>
 
           <motion.div style={{ y: cardY }}>
-            <UpworkHeroCard />
+            <AtlasNowCard />
           </motion.div>
         </div>
       </Container>

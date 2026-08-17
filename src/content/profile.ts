@@ -3,7 +3,7 @@ export const SITE_URL = import.meta.env.VITE_SITE_URL ?? 'http://localhost:5173'
 export const profile = {
   name: 'Abel Adisu',
   shortName: 'Abel',
-  role: 'Full-Stack Software Engineer',
+  role: 'Software Engineer',
   headline: 'From database to UI.',
   intro:
     'I build secure, scalable backend systems and the polished frontends that sit on top of them — end to end, from database to UI.',
@@ -21,19 +21,28 @@ export const profile = {
     {
       kicker: 'Chapter three',
       title: 'Ship it in production.',
-      body: 'Software Engineer at Atlas Computer Technology. Select freelance work on Upwork — Top Rated, 100% Job Success.',
+      body: 'Currently Software Engineer at Atlas Computer Technology. Select freelance work on Upwork — Top Rated, 100% Job Success.',
     },
   ],
   summary:
-    'Full-stack engineer in Addis Ababa. Java, Spring Boot, React, TypeScript. Atlas Computer Technology by day. Select Upwork work on the side.',
-  status: 'AVAILABLE FOR SELECT PROJECTS',
-  signal: 'BUILD · RESCUE · SHIP',
+    'Currently Software Engineer at Atlas Computer Technology in Addis Ababa — Java, Spring Boot, React, on-site in production. Select Upwork work on the side.',
+  status: 'LIVE · ATLAS COMPUTER TECHNOLOGY',
+  signal: 'ATLAS · PRODUCTION · ADDIS ABABA',
   locationLabel: 'Addis Ababa, Ethiopia',
   years: '6 years in production',
   education: 'B.Sc., Wollega University, 2019–2023',
   email: 'abeladisu73@gmail.com',
   employer: 'Atlas Computer Technology',
-  availability: 'Open to full-stack, backend-focused, and frontend-heavy work — on-site, hybrid, or remote.',
+  current: {
+    org: 'Atlas Computer Technology',
+    role: 'Software Engineer',
+    period: 'March 2024 – Present',
+    location: 'Addis Ababa, Ethiopia',
+    workMode: 'On-site',
+    env: 'Production',
+    stack: ['Java', 'Spring Boot', 'React', 'Keycloak', 'Kafka', 'PostgreSQL'],
+  },
+  availability: 'Employed at Atlas. Open to select full-stack, backend, and frontend work — on-site, hybrid, or remote.',
   social: {
     github: 'https://github.com/Abelo73',
     linkedin: 'https://www.linkedin.com/in/abeladisunugatu/',
@@ -41,7 +50,7 @@ export const profile = {
   },
   badges: ['Top Rated', '100% Job Success'],
   photo: '/abel-adisu.png',
-  topSkills: ['Java', 'Spring Boot', 'Keycloak', 'Apache Kafka', 'Spring MVC'],
+  topSkills: ['Java', 'Spring Boot', 'Keycloak', 'Apache Kafka', 'Supabase'],
   layers: [
     {
       id: 'ui',
@@ -69,8 +78,8 @@ export const profile = {
       title: 'The record that has to be true',
       items: [
         'PostgreSQL / MySQL schema design and optimization',
-        'Docker, Kubernetes, Grafana, Loki',
-        'CI/CD pipelines and containerized deployments',
+        'Supabase on product work — Postgres, Auth, Storage',
+        'Docker, Kubernetes, Grafana, Loki, CI/CD',
       ],
     },
   ],
@@ -89,6 +98,7 @@ export const profile = {
     'Java & Spring Boot specialist',
     'React, Angular & TypeScript',
     'Cloud-native & microservices',
+    'Supabase product backends',
     'AI automation with n8n',
   ],
   philosophy: [

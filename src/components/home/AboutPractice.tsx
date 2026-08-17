@@ -16,15 +16,21 @@ export function AboutPractice() {
         <div>
           <h3 className="font-semibold">The goal</h3>
           <p className="mt-3 text-muted">
-            {profile.intro} Day job:{' '}
+            {profile.intro} Currently:{' '}
             <strong className="font-medium text-fg">{profile.employer}</strong>. Freelance:{' '}
             <strong className="font-medium text-fg">Upwork</strong>, Top Rated.
           </p>
         </div>
         <GlassCard className="p-5">
-          <p className="text-xs uppercase tracking-[0.18em] text-muted">Now</p>
-          <p className="mt-2 text-sm text-muted">
-            Software Engineer · Addis Ababa · Java, Spring Boot, React, Keycloak, Kafka
+          <p className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-ok">
+            <span className="live-dot size-2 rounded-full bg-ok" aria-hidden="true" />
+            Currently working
+          </p>
+          <p className="mt-2 font-medium">
+            {profile.current.role} · {profile.current.org}
+          </p>
+          <p className="mt-1 text-sm text-muted">
+            {profile.current.period} · {profile.current.workMode} · {profile.current.location}
           </p>
         </GlassCard>
       </div>

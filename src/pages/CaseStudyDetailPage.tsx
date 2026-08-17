@@ -32,7 +32,7 @@ export function CaseStudyDetailPage() {
           </ul>
         </li>
       </ol>
-      <section className="mt-12 max-w-xl">
+      <section className="mt-12">
         <h2 className="text-2xl font-semibold tracking-tight">Architecture</h2>
         <div className="mt-5">
           <ArchitectureGraph

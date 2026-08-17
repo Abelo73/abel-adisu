@@ -1,78 +1,22 @@
-import { useMemo, useState } from 'react'
-import {
-  Code2,
-  Database,
-  FileInput,
-  GitBranch,
-  Globe,
-  MessageSquare,
-  Play,
-  Sparkles,
-  UserCheck,
-  Users,
-  Webhook,
-  Workflow,
-} from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
+import { useEffect, useId, useState } from 'react'
+import { motion } from 'motion/react'
+import { Play, Square } from 'lucide-react'
 import type { N8nKind, WorkflowStep } from '@/content/automation'
+import { useReducedMotion } from '@/hooks/useMedia'
 import { cn } from '@/lib/cn'
 
-const NODE_W = 228
-const NODE_H = 76
-const GAP_X = 64
-const GAP_Y = 92
-const PAD = 40
-
-const kinds: Record<N8nKind, { color: string; type: string; icon: LucideIcon }> = {
-  trigger: { color: '#ff6d5a', type: 'Trigger', icon: Webhook },
-  form: { color: '#ff6d5a', type: 'Form Trigger', icon: FileInput },
-  n8n: { color: '#ea4b71', type: 'n8n', icon: Workflow },
-  ai: { color: '#10a37f', type: 'LangChain', icon: Sparkles },
-  if: { color: '#408000', type: 'IF', icon: GitBranch },
-  http: { color: '#1a82e2', type: 'HTTP Request', icon: Globe },
-  database: { color: '#336791', type: 'Postgres', icon: Database },
-  notify: { color: '#4a154b', type: 'Slack', icon: MessageSquare },
-  review: { color: '#ff9922', type: 'Wait', icon: UserCheck },
-  code: { color: '#ff9922', type: 'Code', icon: Code2 },
-  crm: { color: '#00a1e0', type: 'CRM', icon: Users },
-}
-
-function layout(count: number) {
-  const cols = count <= 3 ? count : 4
-  return Array.from({ length: count }, (_, i) => {
-    const row = Math.floor(i / cols)
-    const col = i % cols
-    return {
-      x: PAD + col * (NODE_W + GAP_X),
-      y: PAD + row * (NODE_H + GAP_Y),
-    }
-  })
-}
-
-function endpoints(a: { x: number; y: number }, b: { x: number; y: number }) {
-  if (b.y > a.y) {
-    return {
-      x1: a.x + NODE_W / 2,
-      y1: a.y + NODE_H,
-      x2: b.x + NODE_W / 2,
-      y2: b.y,
-    }
-  }
-  return {
-    x1: a.x + NODE_W,
-    y1: a.y + NODE_H / 2,
-    x2: b.x,
-    y2: b.y + NODE_H / 2,
-  }
-}
-
-function curve(a: { x: number; y: number }, b: { x: number; y: number }) {
-  const { x1, y1, x2, y2 } = endpoints(a, b)
-  if (b.y > a.y) {
-    return `M ${x1} ${y1} C ${x1} ${y1 + 40}, ${x2} ${y2 - 40}, ${x2} ${y2}`
-  }
-  const dx = Math.max(48, Math.abs(x2 - x1) / 2)
-  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`
+const roles: Record<N8nKind, { role: string; inn: string; out: string }> = {
+  trigger: { role: 'Start', inn: 'Webhook, cron, or form', out: 'Signed payload' },
+  form: { role: 'Intake', inn: 'Topic or brief', out: 'Normalized request' },
+  n8n: { role: 'Orchestrate', inn: 'The payload', out: 'Routed work' },
+  ai: { role: 'Model', inn: 'Schema + context', out: 'Structured JSON' },
+  if: { role: 'Gate', inn: 'Model output + rules', out: 'Continue or hold' },
+  http: { role: 'Request', inn: 'Contract + credentials', out: 'Upstream response' },
+  database: { role: 'Record', inn: 'Validated facts', out: 'Durable row' },
+  notify: { role: 'Notify', inn: 'Record link', out: 'A human sees it' },
+  review: { role: 'Review', inn: 'Draft', out: 'Approved or rejected' },
+  code: { role: 'Transform', inn: 'Structured output', out: 'Publishable artifact' },
+  crm: { role: 'CRM', inn: 'Person payload', out: 'Merged record' },
 }
 
 export function WorkflowViz({
@@ -82,98 +26,144 @@ export function WorkflowViz({
   steps: WorkflowStep[]
   title: string
 }) {
+  const reduced = useReducedMotion()
+  const markerId = useId()
   const [active, setActive] = useState(0)
+  const [playing, setPlaying] = useState(false)
   const current = steps[active]
-  const nodes = useMemo(() => layout(steps.length), [steps.length])
-  const cols = steps.length <= 3 ? steps.length : 4
-  const rows = Math.ceil(steps.length / cols)
-  const width = PAD * 2 + cols * NODE_W + (cols - 1) * GAP_X
-  const height = PAD * 2 + rows * NODE_H + (rows - 1) * GAP_Y
-  const meta = current ? kinds[current.kind] : null
+  const meta = current ? roles[current.kind] : null
+  const total = steps.length
+  const progress = total ? ((active + 1) / total) * 100 : 0
+
+  useEffect(() => {
+    if (!playing || reduced) return
+    const id = window.setInterval(() => {
+      setActive((index) => {
+        if (index >= steps.length - 1) {
+          setPlaying(false)
+          return index
+        }
+        return index + 1
+      })
+    }, 850)
+    return () => window.clearInterval(id)
+  }, [playing, reduced, steps.length])
+
+  if (!current || !meta) return null
 
   return (
-    <section className="overflow-hidden rounded-[24px] border border-white/10 bg-[#14141b] text-white shadow-[var(--shadow-lift)]">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
-        <div className="flex items-center gap-3">
-          <span className="grid size-7 place-items-center rounded-md bg-[#ea4b71] text-[0.65rem] font-bold">n8</span>
-          <div>
-            <p className="text-sm font-medium">{title}</p>
-            <p className="text-[0.65rem] uppercase tracking-[0.14em] text-white/45">Editor · inactive</p>
-          </div>
+    <section className="run-desk overflow-hidden rounded-[28px] border border-line">
+      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-5 py-4 sm:px-6">
+        <div>
+          <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted">The run</p>
+          <h3 className="mt-1 text-lg font-semibold tracking-tight">{title}</h3>
         </div>
         <button
           type="button"
-          className="inline-flex min-h-10 items-center gap-2 rounded-md bg-[#ff6d5a] px-3 text-sm font-medium text-white"
-          onClick={() => setActive(0)}
+          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-fg/5 px-4 text-sm font-medium hover:bg-fg/10"
+          onClick={() => {
+            if (playing) {
+              setPlaying(false)
+              return
+            }
+            setActive(0)
+            setPlaying(!reduced)
+          }}
         >
-          <Play size={14} fill="currentColor" aria-hidden="true" />
-          Execute workflow
+          {playing ? <Square size={12} fill="currentColor" aria-hidden="true" /> : <Play size={14} fill="currentColor" aria-hidden="true" />}
+          {playing ? 'Stop' : 'Walk the run'}
         </button>
-      </div>
+      </header>
 
-      <div className="n8n-canvas overflow-x-auto">
-        <div className="relative min-w-full" style={{ width, height }}>
-          <svg className="absolute inset-0 h-full w-full" viewBox={`0 0 ${width} ${height}`} aria-hidden="true">
-            {nodes.slice(0, -1).map((node, index) => {
-              const next = nodes[index + 1]
-              const ends = endpoints(node, next)
-              return (
-              <g key={`${steps[index].id}-edge`}>
-                <path
-                  d={curve(node, next)}
-                  fill="none"
-                  stroke={index === active ? '#ff6d5a' : 'rgb(255 255 255 / 0.28)'}
-                  strokeWidth="2"
-                />
-                <circle cx={ends.x1} cy={ends.y1} r="4" fill="#c3c3c9" />
-                <circle cx={ends.x2} cy={ends.y2} r="4" fill="#c3c3c9" />
-              </g>
-              )
-            })}
-          </svg>
+      <div className="grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
+        <ol className="relative order-2 space-y-1 p-4 lg:order-1 lg:border-r lg:border-line lg:p-5">
+          <span className="pointer-events-none absolute top-6 bottom-6 left-[2.15rem] w-px bg-line lg:left-[2.4rem]" aria-hidden="true" />
           {steps.map((step, index) => {
-            const pos = nodes[index]
-            const kind = kinds[step.kind]
-            const Icon = kind.icon
             const selected = index === active
+            const passed = index < active
+            const role = roles[step.kind]
             return (
-              <button
-                key={step.id}
-                type="button"
-                data-cursor="node"
-                onClick={() => setActive(index)}
-                aria-pressed={selected}
-                className={cn(
-                  'absolute flex min-h-12 w-[228px] items-center gap-3 rounded-md border bg-[#414244] px-2 py-2 text-left shadow-lg',
-                  selected ? 'border-[#ff6d5a] ring-2 ring-[#ff6d5a]/70' : 'border-white/10 hover:border-white/25',
-                )}
-                style={{ left: pos.x, top: pos.y, height: NODE_H }}
-              >
-                <span
-                  className="grid size-10 shrink-0 place-items-center rounded-sm text-white"
-                  style={{ background: kind.color }}
+              <li key={step.id} className="relative">
+                <button
+                  type="button"
+                  aria-pressed={selected}
+                  onClick={() => {
+                    setPlaying(false)
+                    setActive(index)
+                  }}
+                  className={cn(
+                    'relative flex min-h-12 w-full items-center gap-3 rounded-2xl px-2 py-2 text-left transition-colors',
+                    selected ? 'bg-fg/6' : 'hover:bg-fg/4',
+                  )}
                 >
-                  <Icon size={18} aria-hidden="true" />
-                </span>
-                <span>
-                  <span className="block text-sm font-medium leading-tight">{step.label}</span>
-                  <span className="mt-0.5 block text-[0.65rem] text-white/55">{kind.type}</span>
-                </span>
-              </button>
+                  {selected ? (
+                    <motion.span
+                      layoutId={markerId}
+                      className="absolute inset-0 rounded-2xl bg-accent/10 ring-1 ring-accent/35"
+                      transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 32 }}
+                    />
+                  ) : null}
+                  <span
+                    className={cn(
+                      'relative z-10 grid size-8 shrink-0 place-items-center rounded-full font-mono text-[0.7rem]',
+                      selected
+                        ? 'bg-accent text-white'
+                        : passed
+                          ? 'bg-ok/15 text-ok'
+                          : 'bg-fg/8 text-muted',
+                    )}
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="relative z-10 min-w-0">
+                    <span className="block truncate font-medium leading-tight">{step.label}</span>
+                    <span className="mt-0.5 block font-mono text-[0.65rem] uppercase tracking-[0.12em] text-muted">
+                      {role.role}
+                    </span>
+                  </span>
+                </button>
+              </li>
             )
           })}
-        </div>
-      </div>
+        </ol>
 
-      {current && meta ? (
-        <div className="border-t border-white/10 bg-[#1c1c24] px-4 py-4">
-          <p className="text-[0.65rem] uppercase tracking-[0.16em] text-white/45">Parameters · {meta.type}</p>
-          <p className="mt-2 text-sm text-white/80">
-            <span className="font-medium text-white">{current.label}. </span>
-            {current.detail}
-          </p>
-        </div>
-      ) : null}
+        <aside
+          className="run-inspect order-1 flex flex-col justify-between gap-8 p-5 lg:order-2 lg:p-8"
+          aria-live="polite"
+        >
+          <div>
+            <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-accent">
+              Now · {meta.role}
+            </p>
+            <p className="mt-3 font-display text-4xl leading-none tracking-tight">{current.label}</p>
+            <p className="mt-4 max-w-md text-muted">{current.detail}</p>
+          </div>
+
+          <dl className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border border-line bg-bg/40 p-4">
+              <dt className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted">In</dt>
+              <dd className="mt-2 text-sm">{meta.inn}</dd>
+            </div>
+            <div className="rounded-2xl border border-line bg-bg/40 p-4">
+              <dt className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted">Out</dt>
+              <dd className="mt-2 text-sm">{meta.out}</dd>
+            </div>
+          </dl>
+
+          <div>
+            <div className="h-1 overflow-hidden rounded-full bg-line">
+              <motion.div
+                className="h-full origin-left bg-accent"
+                animate={{ width: `${progress}%` }}
+                transition={reduced ? { duration: 0 } : { duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </div>
+            <p className="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-muted">
+              Hop {String(active + 1).padStart(2, '0')} of {String(total).padStart(2, '0')}
+            </p>
+          </div>
+        </aside>
+      </div>
     </section>
   )
 }

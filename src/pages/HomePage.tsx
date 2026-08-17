@@ -4,6 +4,7 @@ import { profile } from '@/content/profile'
 import { projects } from '@/content/projects'
 import { services } from '@/content/services'
 import { StoryHero } from '@/components/hero/StoryHero'
+import { StackWorkflow } from '@/components/architecture/StackWorkflow'
 import { AboutPractice } from '@/components/home/AboutPractice'
 import { ScopePath } from '@/components/home/ScopePath'
 import { KeyInsights } from '@/components/home/KeyInsights'
@@ -20,6 +21,23 @@ export function HomePage() {
   return (
     <div>
       <StoryHero />
+
+      <section className="py-8">
+        <Container>
+          <Reveal>
+            <p className="text-xs uppercase tracking-[0.2em] text-muted">How I ship</p>
+            <h2 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">
+              From a single UI to production-ready.
+            </h2>
+            <p className="mt-4 max-w-2xl text-muted">
+              I start with the screen and I don’t hand off. React and shadcn, then Camunda, Java services, Keycloak,
+              Kafka, MinIO — Docker, Kubernetes, Rancher, Nginx — until it runs. On product work I also ship with
+              Supabase: Postgres, Auth, and Storage.
+            </p>
+          </Reveal>
+          <StackWorkflow />
+        </Container>
+      </section>
 
       <ClientStories />
 
@@ -80,10 +98,11 @@ export function HomePage() {
       <section className="py-24">
         <Container>
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted">n8n</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-muted">Automation</p>
             <h2 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">Workflows designed as software</h2>
             <p className="mt-4 max-w-2xl text-muted">
-              Triggers, models, gates, APIs, and a durable record — the same shape you would see on an n8n canvas.
+              n8n under the hood. On the page: one run you can walk — trigger, model, gate, side effect, and a
+              record.
             </p>
             <div className="mt-10">
               <WorkflowViz title="Core intelligence path" steps={coreWorkflow} />

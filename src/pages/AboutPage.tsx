@@ -26,7 +26,7 @@ export function AboutPage() {
           <div className="flex flex-col justify-end">
             <p className="text-lg text-muted">{profile.intro}</p>
             <p className="mt-5 text-sm text-muted">
-              Software Engineer at {profile.employer}. {profile.education}. {profile.availability}
+              Currently {profile.current.role} at {profile.current.org}. {profile.education}. {profile.availability}
             </p>
             <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
               {profile.badges.map((badge) => (
@@ -78,11 +78,14 @@ export function AboutPage() {
 
         <section className="mt-24 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted">Atlas Computer Technology</p>
+            <p className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-ok">
+              <span className="live-dot size-2 rounded-full bg-ok" aria-hidden="true" />
+              Currently working · Atlas Computer Technology
+            </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">The seat I hold now</h2>
             <p className="mt-4 text-muted">
-              QA first, then software engineer — same company, longer systems. Addis Ababa, on-site. Freelance on Upwork
-              in parallel.
+              Software Engineer, March 2024 – Present. QA first, then this seat — same company, longer systems. Addis
+              Ababa, on-site. Freelance on Upwork in parallel.
             </p>
             <Button to="/experience" variant="secondary" className="mt-6">
               Full experience
@@ -93,7 +96,15 @@ export function AboutPage() {
               .filter((item) => item.org === 'Atlas Computer Technology')
               .map((item) => (
                 <li key={item.id} className="glass rounded-[24px] p-5">
-                  <p className="text-xs uppercase tracking-[0.16em] text-muted">{item.period}</p>
+                  <p className="text-xs uppercase tracking-[0.16em] text-muted">
+                    {item.period}
+                    {item.period.includes('Present') ? (
+                      <span className="ml-2 inline-flex items-center gap-1.5 normal-case tracking-normal text-ok">
+                        <span className="live-dot size-1.5 rounded-full bg-ok" aria-hidden="true" />
+                        Live
+                      </span>
+                    ) : null}
+                  </p>
                   <h3 className="mt-2 font-semibold">{item.role}</h3>
                   <p className="mt-2 text-sm text-muted">{item.summary}</p>
                 </li>

@@ -16,8 +16,7 @@ export function AutomationPage() {
         ))}
       </ul>
       <p className="mt-10 text-sm text-muted">
-        Click a node the way you would in n8n. These canvases are designed like the editor — dotted grid, typed nodes,
-        bezier wires — not a bullet list pretending to be a workflow.
+        Each play is one run. Click a hop, or walk it — the model never posts unsupervised.
       </p>
       <div className="mt-6">
         <WorkflowViz title="Core intelligence path" steps={coreWorkflow} />

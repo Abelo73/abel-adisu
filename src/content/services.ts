@@ -32,7 +32,7 @@ export const services: Service[] = [
       'Build in vertical slices, not layers that only meet at the end.',
       'Harden: tests, observability, and a release path.',
     ],
-    technologies: ['Java', 'Spring Boot', 'React', 'TypeScript', 'PostgreSQL', 'Docker'],
+    technologies: ['Java', 'Spring Boot', 'React', 'TypeScript', 'PostgreSQL', 'Supabase', 'Docker'],
   },
   {
     slug: 'backend-development',
@@ -91,7 +91,7 @@ export const services: Service[] = [
       'Build layouts, then pages, then the awkward states.',
       'Performance pass: split routes, reserve space, respect reduced motion.',
     ],
-    technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Spring Boot', 'PostgreSQL'],
+    technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Spring Boot', 'PostgreSQL', 'Supabase'],
   },
   {
     slug: 'ai-automation',

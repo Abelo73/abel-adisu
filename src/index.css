@@ -155,6 +155,61 @@ body {
   animation: float-card 5.5s ease-in-out infinite;
 }
 
+.workflow-board {
+  color: var(--fg);
+  background-color: #f6f3ff;
+  background-image: radial-gradient(#d4ccec 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.dark .workflow-board {
+  background-color: #12101a;
+  background-image: radial-gradient(#2c2740 1px, transparent 1px);
+}
+
+.workflow-node {
+  background: #ffffff;
+}
+
+.dark .workflow-node {
+  background: #1c1928;
+}
+
+.workflow-port {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 22%, transparent);
+}
+
+.run-desk {
+  background: color-mix(in srgb, var(--card) 88%, var(--bg));
+}
+
+.dark .run-desk {
+  background: #0e0c18;
+}
+
+.run-inspect {
+  background:
+    radial-gradient(520px 280px at 88% -10%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+    transparent;
+}
+
+.live-dot {
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 50%, transparent);
+  animation: live-pulse 2.2s ease-out infinite;
+}
+
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 50%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

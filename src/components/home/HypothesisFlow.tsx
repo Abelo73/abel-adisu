@@ -5,7 +5,7 @@ export function HypothesisFlow() {
     <section className="relative py-24">
       <div className="flex items-end justify-between gap-6">
         <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">Product hypothesis</h2>
-        <span className="font-display text-5xl italic text-muted/40">01</span>
+        <span className="font-display text-5xl text-muted/40">01</span>
       </div>
       <div className="mt-14 grid gap-5 lg:grid-cols-[1fr_1.1fr]">
         <div className="space-y-5">

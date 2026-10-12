@@ -37,7 +37,7 @@ export function CommandPalette({
         role="dialog"
         aria-modal="true"
         aria-labelledby="command-title"
-        className="relative w-full max-w-lg overflow-hidden rounded-[24px] border border-line bg-card shadow-[var(--shadow-lift)] backdrop-blur-xl"
+        className="relative w-full max-w-lg overflow-hidden rounded-[16px] border border-line bg-card shadow-[var(--shadow-lift)] backdrop-blur-xl"
       >
         <h2 id="command-title" className="sr-only">
           Command palette

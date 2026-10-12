@@ -37,9 +37,9 @@ export function StatCallout({
 
   return (
     <div className="mt-8">
-      <p ref={ref} className="font-display text-[clamp(3.2rem,9vw,6.5rem)] italic leading-none tracking-tight">
+      <p ref={ref} className="font-display text-[clamp(3.2rem,9vw,6.5rem)] leading-none tracking-tight">
         {shown}
-        <span className="ml-2 text-2xl text-muted not-italic">/ {of}</span>
+        <span className="ml-2 text-2xl text-muted">/ {of}</span>
       </p>
       <p className="mt-3 text-sm text-accent">{caption}</p>
     </div>

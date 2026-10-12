@@ -60,7 +60,7 @@ export function AboutChapters() {
                   </p>
                   <div className="pl-10 md:pl-8">
                     <p className="text-xs uppercase tracking-[0.18em] text-muted">{chapter.place}</p>
-                    <h3 className="mt-3 font-display text-3xl italic leading-tight md:text-5xl">{chapter.title}</h3>
+                    <h3 className="mt-3 font-display text-3xl leading-tight md:text-5xl">{chapter.title}</h3>
                     <p className="mt-5 max-w-2xl text-lg text-muted">{chapter.body}</p>
                   </div>
                 </motion.article>

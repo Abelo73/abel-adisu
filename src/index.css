@@ -3,11 +3,12 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-display: "Playfair Display", ui-serif, Georgia, serif;
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   --color-bg: var(--bg);
+  --color-alt: var(--alt);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
@@ -19,42 +20,48 @@
   --color-ok: var(--ok);
   --color-glow: var(--glow-color);
 
-  --radius-sm: 999px;
-  --radius-md: 24px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
   --shadow-lift: var(--shadow-lift);
 }
 
+/* Palette and type come from the Blink design system: navy ink, brand blue,
+   cobalt and sky; Sora + IBM Plex. Light is the default, dark is the toggle. */
 :root,
 .light {
   color-scheme: light;
-  --bg: #f4f1fb;
-  --fg: #140c22;
-  --muted: #5c5470;
-  --accent: #6d4aff;
+  --bg: #ffffff;
+  --alt: #f4f7fc;
+  --fg: #001745;
+  --muted: #4a5573;
+  --accent: #0026a0;
   --accent-fg: #ffffff;
-  --steel: #7b61ff;
-  --line: rgb(20 12 34 / 0.12);
-  --card: rgb(255 255 255 / 0.72);
-  --danger: #b91c1c;
-  --ok: #166534;
-  --glow-color: #9f7fdb;
-  --shadow-lift: 0 30px 80px rgb(92 59 168 / 0.18);
+  --steel: #1368e8;
+  --line: #e3e9f5;
+  --card: #ffffff;
+  --danger: #c6432f;
+  --ok: #0b6a45;
+  --glow-color: #1368e8;
+  --shadow-lift: 0 10px 30px rgb(0 23 69 / 0.08);
+  --icon-bg: #eaf1fe;
 }
 
 .dark {
   color-scheme: dark;
-  --bg: #07060f;
-  --fg: #ffffff;
-  --muted: #b8b0cc;
-  --accent: #8b6cff;
-  --accent-fg: #ffffff;
-  --steel: #c4b5fd;
+  --bg: #030a1c;
+  --alt: #0a1a44;
+  --fg: #f3f6ff;
+  --muted: #9fb0d8;
+  --accent: #4c9cff;
+  --accent-fg: #021028;
+  --steel: #7fd0ff;
   --line: rgb(255 255 255 / 0.1);
-  --card: rgb(255 255 255 / 0.05);
-  --danger: #f87171;
-  --ok: #4ade80;
-  --glow-color: #7b61ff;
-  --shadow-lift: 0 40px 120px rgb(92 59 168 / 0.35);
+  --card: rgb(12 28 70 / 0.55);
+  --danger: #f0806b;
+  --ok: #34d399;
+  --glow-color: #4c9cff;
+  --shadow-lift: 0 24px 60px rgb(0 0 0 / 0.45);
+  --icon-bg: #16295a;
 }
 
 html,
@@ -63,74 +70,131 @@ body,
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
   font-size: 1.0625rem;
-  line-height: 1.7;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+/* Sora is always bold and tightly tracked, as on Blink. */
+.font-display {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-style: normal;
+}
+
 ::selection {
-  background: color-mix(in srgb, var(--accent) 55%, transparent);
-  color: #fff;
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  color: inherit;
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline: 2px solid var(--steel);
+  outline-offset: 2px;
 }
 
+/* Flat page: white, with section bands and hairlines instead of glow. */
 .atmosphere {
-  background:
-    radial-gradient(900px 520px at 18% -8%, rgb(123 97 255 / 0.38), transparent 58%),
-    radial-gradient(720px 480px at 92% 12%, rgb(133 40 72 / 0.28), transparent 55%),
-    radial-gradient(640px 400px at 50% 110%, rgb(159 127 219 / 0.18), transparent 50%),
-    var(--bg);
+  background: var(--bg);
 }
 
-.light .atmosphere {
-  background:
-    radial-gradient(900px 520px at 18% -8%, rgb(123 97 255 / 0.18), transparent 58%),
-    radial-gradient(720px 480px at 92% 12%, rgb(232 145 174 / 0.2), transparent 55%),
-    radial-gradient(640px 400px at 50% 110%, rgb(159 127 219 / 0.14), transparent 50%),
-    var(--bg);
+/* Cinematic backdrop: slow blue/cyan aurora behind everything (dark theme). */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+  display: none;
+}
+
+.dark .aurora {
+  display: block;
+}
+
+.aurora span {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  animation: aurora-drift 22s ease-in-out infinite;
+}
+
+.aurora span:nth-child(1) {
+  left: -10%;
+  top: -12%;
+  width: 46rem;
+  height: 46rem;
+  background: rgb(19 104 232 / 0.42);
+}
+
+.aurora span:nth-child(2) {
+  right: -12%;
+  top: 30%;
+  width: 38rem;
+  height: 38rem;
+  background: rgb(54 183 255 / 0.2);
+  animation-delay: -8s;
+  animation-direction: reverse;
+}
+
+.aurora span:nth-child(3) {
+  left: 25%;
+  bottom: -18%;
+  width: 40rem;
+  height: 40rem;
+  background: rgb(0 38 160 / 0.5);
+  animation-delay: -14s;
+}
+
+@keyframes aurora-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(60px, 40px, 0) scale(1.15);
+  }
+}
+
+.dark .glass {
+  backdrop-filter: blur(18px);
 }
 
 .glass {
   background: var(--card);
   border: 1px solid var(--line);
-  backdrop-filter: blur(22px);
-  box-shadow: var(--shadow-lift);
+  box-shadow: none;
 }
 
 .watermark {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  letter-spacing: -0.06em;
-  color: rgb(255 255 255 / 0.06);
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: color-mix(in srgb, var(--accent) 7%, transparent);
   user-select: none;
-}
-
-.dark .watermark {
-  color: rgb(255 255 255 / 0.055);
-}
-
-.light .watermark {
-  color: rgb(20 12 34 / 0.06);
 }
 
 .speech-bubble {
   position: relative;
-  border-radius: 22px;
+  border-radius: 16px;
   padding: 1rem 1.15rem;
   color: var(--fg);
-  background: color-mix(in srgb, var(--card) 92%, transparent);
-  border: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
-  backdrop-filter: blur(22px);
-  box-shadow: 0 0 28px rgb(123 97 255 / 0.14);
+  background: var(--card);
+  border: 1px solid var(--line);
 }
 
 .speech-bubble::before {
@@ -140,8 +204,8 @@ body {
   left: -5px;
   width: 10px;
   height: 10px;
-  background: color-mix(in srgb, var(--card) 92%, transparent);
-  border: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
+  background: var(--card);
+  border: 1px solid var(--line);
   border-right: 0;
   border-top: 0;
   transform: rotate(45deg);
@@ -150,7 +214,7 @@ body {
 .speech-bubble[data-side='right']::before {
   left: auto;
   right: -5px;
-  border: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
+  border: 1px solid var(--line);
   border-left: 0;
   border-bottom: 0;
 }
@@ -164,19 +228,26 @@ body {
 }
 
 .story-gradient {
-  background: linear-gradient(90deg, #c4b5fd, #7b61ff 40%, #5eead4);
+  background: linear-gradient(90deg, #0026a0, #1368e8 55%, #36b7ff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
+.dark .story-gradient {
+  background: linear-gradient(90deg, #ffffff, #8fc4ff 45%, #36b7ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Small loops, as on Blink: a gentle float, a live-dot pulse, ripple rings. */
 @keyframes float-card {
   0%,
   100% {
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
   50% {
-    transform: translate3d(0, -14px, 0);
+    transform: translateY(-7px);
   }
 }
 
@@ -184,64 +255,142 @@ body {
   animation: float-card 5.5s ease-in-out infinite;
 }
 
-.story-gradient {
-  background: linear-gradient(90deg, #c4b5fd, #7b61ff 40%, #5eead4);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+@keyframes ripple {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
 }
 
-@keyframes float-card {
+.ripple-ring {
+  animation: ripple 7s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+.ripple-ring:nth-child(2) {
+  animation-delay: 2.33s;
+}
+
+.ripple-ring:nth-child(3) {
+  animation-delay: 4.66s;
+}
+
+@keyframes typing-dot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+.typing-dot {
+  animation: typing-dot 1s ease-in-out infinite;
+}
+
+@keyframes phone-float {
   0%,
   100% {
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
   50% {
-    transform: translate3d(0, -14px, 0);
+    transform: translateY(-10px);
   }
 }
 
-.float-enabled .float-card {
-  animation: float-card 5.5s ease-in-out infinite;
+@keyframes wall-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(28px, 22px, 0) scale(1.15);
+  }
+}
+
+@keyframes glow-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes glare-sweep {
+  0%,
+  55% {
+    transform: translateX(0) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(520%) skewX(-12deg);
+  }
+}
+
+.phone-glare {
+  animation: glare-sweep 6s ease-in-out 2s infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  overflow: hidden;
+}
+
+.marquee-track {
+  animation: marquee 50s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.phone-float {
+  animation: phone-float 6s ease-in-out infinite;
+}
+
+.wall-orb {
+  animation: wall-drift 12s ease-in-out infinite;
+}
+
+.phone-glow {
+  animation: glow-breathe 4s ease-in-out infinite;
+}
+
+.hero-grid {
+  background-image: radial-gradient(color-mix(in srgb, var(--fg) 14%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 70% 70% at 70% 45%, #000 20%, transparent 75%);
 }
 
 .work-stage {
-  perspective: 1800px;
-  perspective-origin: 58% 40%;
-}
-
-.work-stage-inner {
-  transform-style: preserve-3d;
-}
-
-.work-pane {
-  transform-style: preserve-3d;
-}
-
-@media (min-width: 1024px) {
-  .work-pane[data-tilt='true'] {
-    transform: rotateY(var(--ry)) rotateX(var(--rx));
-  }
+  background: #001645;
 }
 
 .workflow-board {
   color: var(--fg);
-  background-color: #f6f3ff;
-  background-image: radial-gradient(#d4ccec 1px, transparent 1px);
+  background-color: var(--alt);
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
   background-size: 18px 18px;
 }
 
-.dark .workflow-board {
-  background-color: #12101a;
-  background-image: radial-gradient(#2c2740 1px, transparent 1px);
-}
-
 .workflow-node {
-  background: #ffffff;
-}
-
-.dark .workflow-node {
-  background: #1c1928;
+  background: var(--card);
 }
 
 .workflow-port {
@@ -249,33 +398,24 @@ body {
 }
 
 .run-desk {
-  background: color-mix(in srgb, var(--card) 88%, var(--bg));
-}
-
-.dark .run-desk {
-  background: #0e0c18;
+  background: var(--alt);
 }
 
 .run-inspect {
-  background:
-    radial-gradient(520px 280px at 88% -10%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
-    transparent;
+  background: transparent;
 }
 
 .live-dot {
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 50%, transparent);
-  animation: live-pulse 2.2s ease-out infinite;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 45%, transparent);
+  animation: live-pulse 1.8s ease-out infinite;
 }
 
 @keyframes live-pulse {
   0% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 50%, transparent);
-  }
-  70% {
-    box-shadow: 0 0 0 8px transparent;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 45%, transparent);
   }
   100% {
-    box-shadow: 0 0 0 0 transparent;
+    box-shadow: 0 0 0 8px transparent;
   }
 }
 

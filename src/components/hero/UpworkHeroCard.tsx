@@ -9,14 +9,10 @@ export function UpworkHeroCard() {
 
   return (
     <div className="relative">
-      <div
-        className="pointer-events-none absolute -right-8 -top-10 size-48 rounded-full bg-[#F5C14A]/20 blur-[70px]"
-        aria-hidden="true"
-      />
       <a
         href={profile.social.upwork}
         {...newTab}
-        className="glass relative block overflow-hidden rounded-[28px] p-6 transition duration-300 hover:border-accent/40"
+        className="glass relative block overflow-hidden rounded-[16px] p-6 transition duration-300 hover:border-accent/40"
       >
         <div className="flex items-start gap-4">
           <span className="relative shrink-0">
@@ -45,10 +41,10 @@ export function UpworkHeroCard() {
         ) : null}
 
         <ul className="mt-5 flex flex-wrap gap-2">
-          <li className="rounded-full bg-[#1F57C3]/20 px-3 py-1.5 text-xs font-medium text-[#8EB4FF]">
+          <li className="rounded-full bg-[#eaf1fe] px-3 py-1.5 text-xs font-medium text-[#0026a0] dark:bg-[#16295a] dark:text-[#8fc4ff]">
             {upworkProof.jobSuccess} Job Success
           </li>
-          <li className="rounded-full bg-[#1F57C3]/20 px-3 py-1.5 text-xs font-medium text-[#8EB4FF]">
+          <li className="rounded-full bg-[#eaf1fe] px-3 py-1.5 text-xs font-medium text-[#0026a0] dark:bg-[#16295a] dark:text-[#8fc4ff]">
             {upworkProof.badge}
           </li>
           <li className="rounded-full border border-line px-3 py-1.5 text-xs">{upworkJobs.length} completed jobs shown</li>
@@ -74,7 +70,7 @@ export function UpworkTestimonials({ compact = false }: { compact?: boolean }) {
           {loop.map((job, index) => (
             <li
               key={`${job.slug}-${index}`}
-              className="glass w-[min(34rem,85vw)] shrink-0 rounded-[24px] p-6"
+              className="glass w-[min(34rem,85vw)] shrink-0 rounded-[16px] p-6"
             >
               <Stars />
               <p className="mt-2 text-xs uppercase tracking-[0.16em] text-muted">
@@ -98,7 +94,7 @@ export function UpworkTestimonials({ compact = false }: { compact?: boolean }) {
   return (
     <ul className={compact ? 'grid gap-4 md:grid-cols-2' : 'grid gap-6'}>
       {upworkTestimonials.map((job) => (
-        <li key={job.slug} className="glass rounded-[24px] p-6">
+        <li key={job.slug} className="glass rounded-[16px] p-6">
           <Stars />
           <p className="mt-2 text-xs uppercase tracking-[0.16em] text-muted">
             {job.title} · {job.period}
@@ -121,7 +117,7 @@ export function UpworkWorkDone() {
   return (
     <ul className="grid gap-4 md:grid-cols-3">
       {upworkJobs.map((job) => (
-        <li key={job.slug} className="glass rounded-[24px] p-5">
+        <li key={job.slug} className="glass rounded-[16px] p-5">
           <Stars />
           <h3 className="mt-3 font-semibold tracking-tight">{job.title}</h3>
           <p className="mt-1 text-xs text-muted">{job.period}</p>
@@ -140,7 +136,7 @@ export function UpworkJobs() {
   return (
     <ol className="space-y-6">
       {upworkJobs.map((job) => (
-        <li key={job.slug} className="glass rounded-[24px] p-6">
+        <li key={job.slug} className="glass rounded-[16px] p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <h3 className="text-xl font-semibold tracking-tight">{job.title}</h3>

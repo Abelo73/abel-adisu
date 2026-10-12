@@ -24,7 +24,7 @@ export function KeyInsights() {
       <ul className="relative mt-16 grid gap-8 sm:grid-cols-3">
         {insights.map((item) => (
           <li key={item.label}>
-            <p className="font-display text-6xl italic text-fg">{item.value}</p>
+            <p className="font-display text-6xl text-fg">{item.value}</p>
             <p className="mt-3 text-sm text-muted">{item.label}</p>
           </li>
         ))}

@@ -1,153 +1,131 @@
-import { useRef, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
+import { ArrowUpRight } from 'lucide-react'
 import { getProject } from '@/content/projects'
-import { Reveal } from '@/components/ui/Reveal'
-import { useFinePointer, useReducedMotion } from '@/hooks/useMedia'
-import { usePointerParallax } from '@/hooks/useParallax'
+import { Container } from '@/components/ui/Container'
+import { STAGE, sceneHeight, useScrollStep } from '@/hooks/useScrollStep'
+import { useReducedMotion } from '@/hooks/useMedia'
 import { cn } from '@/lib/cn'
 
-const panes = [
-  {
-    slug: 'ijcms',
-    src: '/work/ijcms.webp',
-    className: 'left-[48%] top-[2%] w-[38%] max-lg:left-auto max-lg:top-auto max-lg:w-auto',
-    rotateY: -26,
-    rotateX: 12,
-    z: 1,
-  },
-  {
-    slug: 'itas-risk-studio',
-    src: '/work/itas-risk-studio.webp',
-    className: 'left-[2%] top-[28%] w-[36%] max-lg:left-auto max-lg:top-auto max-lg:w-auto',
-    rotateY: -28,
-    rotateX: 10,
-    z: 2,
-  },
-  {
-    slug: 'medicare',
-    src: '/work/medicare.webp',
-    className: 'left-[54%] top-[38%] w-[40%] max-lg:left-auto max-lg:top-auto max-lg:w-auto',
-    rotateY: -12,
-    rotateX: 7,
-    z: 3,
-  },
-  {
-    slug: 'art-information-center',
-    src: '/work/art-information-center.webp',
-    className: 'left-[18%] top-[10%] w-[48%] max-lg:left-auto max-lg:top-auto max-lg:w-auto',
-    rotateY: -16,
-    rotateX: 8,
-    z: 5,
-  },
-] as const
+const shots = [
+  { slug: 'art-information-center', src: '/work/art-information-center.webp' },
+  { slug: 'itas-risk-studio', src: '/work/itas-risk-studio.webp' },
+  { slug: 'medicare', src: '/work/medicare.webp' },
+  { slug: 'ijcms', src: '/work/ijcms.webp' },
+]
+
+const items = shots.flatMap((shot) => {
+  const project = getProject(shot.slug)
+  return project ? [{ ...shot, project }] : []
+})
 
 export function WorkStage() {
   const reduced = useReducedMotion()
-  const fine = useFinePointer()
-  const pointer = usePointerParallax(reduced ? 0 : 28)
-  const stageRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: stageRef,
-    offset: ['start end', 'end start'],
-  })
-  const lift = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [40, -40])
+  const { ref, step: active, goTo } = useScrollStep(items.length)
+
+  const current = items[active]
 
   return (
-    <div>
-      <Reveal>
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted">Discover work</p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">Shipped.</h2>
-          </div>
-          <p className="max-w-md text-muted lg:text-right">
-            Live product screens in space — Art Information Center, tax risk, hospital ops, and justice casework.
-          </p>
-        </div>
-      </Reveal>
+    <section ref={ref} style={{ height: sceneHeight(items.length) }} className="relative">
+      <div className={STAGE}>
+        <Container className="w-full">
+        <p className="text-sm font-semibold uppercase tracking-[0.08em] text-steel">Shipped work</p>
+        <h2 className="mt-3 font-display text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.04]">Real systems, <span className="story-gradient">in real use.</span></h2>
 
-      <div
-        ref={stageRef}
-        className="work-stage relative mt-10 overflow-hidden rounded-[28px] border border-white/10 bg-[#0c0b12]"
-      >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_420px_at_70%_10%,rgb(123_97_255_/_0.22),transparent_60%)]" />
-        <motion.div
-          className="work-stage-inner relative grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 lg:block lg:h-[42rem] lg:p-0"
-          style={{
-            y: lift,
-            rotateY: reduced ? 0 : pointer.x * 0.35,
-            rotateX: reduced ? 0 : pointer.y * -0.12,
-          }}
-        >
-          {panes.map((pane, index) => {
-            const project = getProject(pane.slug)
-            if (!project) return null
+      <div className="mt-6 grid items-center gap-8 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-12">
+        {/* list */}
+        <ul className="order-2 grid gap-2 lg:order-1">
+          {items.map((item, index) => {
+            const isActive = index === active
             return (
-              <motion.div
-                key={pane.slug}
-                className={cn('lg:absolute', pane.className)}
-                style={{ zIndex: pane.z }}
-                initial={reduced ? false : { opacity: 0, y: 36 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-8%' }}
-                transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <Link
-                  to={`/projects/${project.slug}`}
-                  data-tilt={reduced ? 'false' : 'true'}
-                  className="work-pane group block rounded-[18px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-                  style={
-                    {
-                      '--ry': `${pane.rotateY}deg`,
-                      '--rx': `${pane.rotateX}deg`,
-                    } as CSSProperties
-                  }
+              <li key={item.slug}>
+                <button
+                  type="button"
+                  onClick={() => goTo(index)}
+                  aria-current={isActive ? 'true' : undefined}
+                  className={cn(
+                    'relative w-full cursor-pointer overflow-hidden rounded-[12px] border px-4 py-3.5 text-left transition-colors duration-300',
+                    isActive ? 'glass border-[#36b7ff]/50 shadow-[0_0_40px_rgb(19_104_232_/_0.3)]' : 'border-transparent hover:bg-fg/5',
+                  )}
                 >
-                  <motion.span
-                    className="block overflow-hidden rounded-[18px] border border-white/15 bg-[#f4f1fb] shadow-[0_30px_70px_rgb(0_0_0_/_0.5)]"
-                    whileHover={fine && !reduced ? { y: -10, scale: 1.03 } : undefined}
-                    transition={{ type: 'spring', stiffness: 320, damping: 26 }}
-                  >
-                    <span className="flex items-center gap-1.5 bg-[#ece8f4] px-3 py-2">
-                      <span className="size-2 rounded-full bg-[#ff5f57]" aria-hidden="true" />
-                      <span className="size-2 rounded-full bg-[#febc2e]" aria-hidden="true" />
-                      <span className="size-2 rounded-full bg-[#28c840]" aria-hidden="true" />
-                      <span className="ml-2 truncate font-mono text-[0.65rem] text-[#5c5470]">
-                        {project.demo ? 'artinformationcenter.com' : project.title}
-                      </span>
-                    </span>
-                    <img
-                      src={pane.src}
-                      alt={project.title}
-                      width={1600}
-                      height={1000}
-                      loading="lazy"
-                      decoding="async"
-                      className="aspect-[16/10] w-full object-cover object-top"
-                    />
-                  </motion.span>
-                  <span className="mt-3 block text-sm text-white/80">
-                    {project.title}
-                    {project.demo ? (
-                      <span className="ml-2 inline-flex items-center gap-1.5 text-ok">
-                        <span className="live-dot size-1.5 rounded-full bg-ok" aria-hidden="true" />
-                        Live
-                      </span>
-                    ) : null}
+                  <span className="flex items-center justify-between gap-3">
+                    <span className={cn('font-display text-lg', !isActive && 'text-muted')}>{item.project.title}</span>
+                    <span className="font-mono text-xs text-muted">{String(index + 1).padStart(2, '0')}</span>
                   </span>
-                </Link>
-              </motion.div>
+                  {isActive ? (
+                    <motion.span
+                      initial={reduced ? false : { opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      className="block overflow-hidden"
+                    >
+                      <span className="mt-2 hidden text-sm text-muted lg:block">{item.project.summary}</span>
+                      <span className="mt-3 hidden flex-wrap gap-1.5 lg:flex">
+                        {item.project.technologies.slice(0, 4).map((tech) => (
+                          <span key={tech} className="rounded-full bg-alt px-2.5 py-1 text-xs font-medium">
+                            {tech}
+                          </span>
+                        ))}
+                      </span>
+                    </motion.span>
+                  ) : null}
+                </button>
+              </li>
             )
           })}
-        </motion.div>
-      </div>
+        </ul>
 
-      <p className="mt-6">
-        <Link to="/projects" className="text-sm underline-offset-4 hover:underline">
-          All work — full boards
-        </Link>
-      </p>
-    </div>
+        {/* browser frame */}
+        <div className="order-1 lg:order-2">
+          <div className="glass overflow-hidden rounded-[16px] shadow-[0_30px_80px_rgb(0_0_0_/_0.5)]">
+            <div className="flex items-center gap-1.5 border-b border-line bg-alt px-4 py-2.5">
+              <span className="size-2.5 rounded-full bg-[#ff5f57]" aria-hidden="true" />
+              <span className="size-2.5 rounded-full bg-[#febc2e]" aria-hidden="true" />
+              <span className="size-2.5 rounded-full bg-[#28c840]" aria-hidden="true" />
+              <span className="ml-3 flex-1 truncate rounded-full bg-bg px-3 py-1 font-mono text-[0.7rem] text-muted">
+                {current.project.demo ? 'artinformationcenter.com' : current.project.title.toLowerCase().replace(/\s+/g, '-')}
+              </span>
+              {current.project.demo ? (
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-ok">
+                  <span className="live-dot size-1.5 rounded-full bg-ok" aria-hidden="true" />
+                  Live
+                </span>
+              ) : null}
+            </div>
+            <div className="relative aspect-[16/10] overflow-hidden bg-alt">
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.img
+                  key={current.slug}
+                  src={current.src}
+                  alt={current.project.title}
+                  width={1600}
+                  height={1000}
+                  loading="lazy"
+                  decoding="async"
+                  initial={reduced ? false : { opacity: 0, scale: 1.08, x: 30 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  exit={reduced ? undefined : { opacity: 0, scale: 0.97, x: -30 }}
+                  transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
+                  className="absolute inset-0 h-full w-full object-cover object-top"
+                />
+              </AnimatePresence>
+            </div>
+          </div>
+          <div className="mt-3 flex items-center justify-between gap-4 text-sm">
+            <Link
+              to={`/projects/${current.slug}`}
+              className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-steel underline-offset-4 hover:underline"
+            >
+              Open {current.project.title}
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+            <Link to="/projects" className="text-muted underline-offset-4 hover:underline">
+              All work
+            </Link>
+          </div>
+        </div>
+      </div>
+        </Container>
+      </div>
+    </section>
   )
 }

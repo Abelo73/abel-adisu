@@ -9,7 +9,7 @@ type ThemeContextValue = {
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
-const STORAGE_KEY = 'abel-theme'
+const STORAGE_KEY = 'abel-theme-v3'
 
 function apply(theme: Theme) {
   const root = document.documentElement

@@ -4,13 +4,13 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import { cn } from '@/lib/cn'
 
 const styles = cva(
-  'inline-flex items-center justify-center gap-2 rounded-full font-medium transition duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-h-12 px-6 text-sm',
+  'inline-flex items-center justify-center gap-2 rounded-full font-semibold transition duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-h-12 px-6 text-[0.9375rem]',
   {
     variants: {
       variant: {
-        primary: 'bg-accent text-white shadow-[0_12px_40px_rgb(123_97_255_/_0.45)] hover:brightness-110',
-        secondary: 'border border-line bg-fg/5 text-fg hover:bg-fg/10',
-        ghost: 'text-fg hover:bg-fg/5',
+        primary: 'bg-fg text-bg hover:opacity-90',
+        secondary: 'border border-[color-mix(in_srgb,var(--fg)_22%,transparent)] bg-transparent text-fg hover:bg-fg hover:text-bg',
+        ghost: 'text-fg hover:bg-alt',
       },
     },
     defaultVariants: { variant: 'primary' },

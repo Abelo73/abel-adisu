@@ -10,7 +10,7 @@ export function JourneyPage() {
       <Container>
         <header className="max-w-3xl pt-10 pb-12 sm:pt-16">
           <p className="text-xs uppercase tracking-[0.22em] text-muted">{journeyOpening.eyebrow}</p>
-          <h1 className="mt-4 font-display text-[clamp(2.4rem,6vw,4.6rem)] italic leading-[1.02] font-medium">
+          <h1 className="mt-4 font-display text-[clamp(2.4rem,6vw,4.6rem)] leading-[1.02] font-medium">
             {journeyOpening.title}
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted">{journeyOpening.lede}</p>
@@ -22,7 +22,7 @@ export function JourneyPage() {
         <JourneyWalk />
 
         <section className="mt-24 max-w-2xl border-t border-line pt-12">
-          <h2 className="font-display text-3xl italic leading-tight md:text-4xl">{journeyClose.title}</h2>
+          <h2 className="font-display text-3xl leading-tight md:text-4xl">{journeyClose.title}</h2>
           <p className="mt-4 text-lg text-muted">{journeyClose.body}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button to="/contact">Work with me</Button>

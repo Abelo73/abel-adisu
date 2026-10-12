@@ -32,7 +32,7 @@ export function ProjectsPage() {
             onClick={() => setFilter(item.id)}
             className={cn(
               'min-h-12 cursor-pointer rounded-full border px-4 text-sm',
-              filter === item.id ? 'border-accent bg-accent text-white' : 'border-line bg-card hover:border-fg/40',
+              filter === item.id ? 'border-accent bg-accent text-accent-fg' : 'border-line bg-card hover:border-fg/40',
             )}
           >
             {item.label}

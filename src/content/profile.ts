@@ -29,8 +29,13 @@ export const profile = {
   hero: {
     eyebrow: 'Hello — I’m Abel.',
     title: 'I write software people can finish at work.',
-    lede: 'Software engineer at Atlas Computer Technology in Addis Ababa. I build the backend, the UI, and the path into production.',
+    lede: 'Backend, UI and production — end to end.',
     primaryCta: 'Work with me',
+    highlights: [
+      { value: '6 yrs', label: 'In production' },
+      { value: '100%', label: 'Job Success' },
+      { value: 'Top Rated', label: 'On Upwork' },
+    ],
     skills: ['Java', 'Spring Boot', 'React', 'TypeScript', 'PostgreSQL'],
   },
   status: 'LIVE · ATLAS COMPUTER TECHNOLOGY',

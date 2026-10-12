@@ -3,6 +3,7 @@ import { Check, Code2, Globe, Layers, Rocket, Search, Users } from 'lucide-react
 import { Container } from '@/components/ui/Container'
 import { STAGE, sceneHeight, useScrollStep } from '@/hooks/useScrollStep'
 import { cn } from '@/lib/cn'
+import { AnimatedText } from '@/components/ui/AnimatedText'
 
 const steps = [
   { icon: Search, label: 'Discover', text: 'Constraints, users, and what “done” means.' },
@@ -23,9 +24,9 @@ export function ScopePath() {
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.08em] text-steel">Scope of work</p>
-          <h2 className="mt-3 max-w-2xl font-display text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.04]">How an <span className="story-gradient">engagement</span> moves.</h2>
+          <AnimatedText as="h2" className="mt-3 max-w-2xl font-display text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.04]">How an <span className="story-gradient">engagement</span> moves.</AnimatedText>
         </div>
-        <p className="max-w-xs text-muted">From the first constraint to a running system — six steps.</p>
+        <AnimatedText as="p" stagger={0.03} delay={0.4} className="max-w-xs text-muted">From the first constraint to a running system — six steps.</AnimatedText>
       </div>
 
       {/* progress strip */}

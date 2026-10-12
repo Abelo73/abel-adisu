@@ -360,6 +360,20 @@ h3 {
   animation-play-state: paused;
 }
 
+@keyframes ticker-up {
+  0%,
+  8% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.ticker-up {
+  animation: ticker-up 14s linear infinite;
+}
+
 .phone-float {
   animation: phone-float 6s ease-in-out infinite;
 }

@@ -1,3 +1,4 @@
+import { Play } from 'lucide-react'
 import { motion } from 'motion/react'
 import { profile } from '@/content/profile'
 import { Button } from '@/components/ui/Button'
@@ -30,7 +31,7 @@ export function StoryHero() {
           <motion.div {...enter(0)}>
             <span className="inline-flex items-center gap-2 glass rounded-full px-3 py-1.5 text-xs font-semibold text-ok">
               <span className="live-dot size-1.5 rounded-full bg-ok" aria-hidden="true" />
-              {profile.current.role} at Atlas
+              {profile.current.role} at Atlas · Fintech payments
             </span>
             <h1 className="mt-6 font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">
               {words.map((word, index) => (
@@ -51,6 +52,12 @@ export function StoryHero() {
               <Button to="/projects" variant="secondary">
                 See my work
               </Button>
+              {profile.storyVideo.youtubeId ? (
+                <Button variant="ghost" onClick={() => document.getElementById('story-video')?.scrollIntoView({ behavior: 'smooth' })}>
+                  <Play size={16} fill="currentColor" aria-hidden="true" />
+                  Watch my story
+                </Button>
+              ) : null}
             </div>
             <dl className="mt-12 flex flex-wrap gap-x-10 gap-y-5">
               {profile.hero.highlights.map((item) => (

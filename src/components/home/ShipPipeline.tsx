@@ -1,11 +1,15 @@
 import { AnimatePresence, motion } from 'motion/react'
+import { Database, Monitor, Rocket, Server, ShieldCheck } from 'lucide-react'
 import { stackWorkflow } from '@/content/stackWorkflow'
 import { Container } from '@/components/ui/Container'
 import { useReducedMotion } from '@/hooks/useMedia'
 import { STAGE, sceneHeight, useScrollStep } from '@/hooks/useScrollStep'
 import { cn } from '@/lib/cn'
+import { AnimatedText } from '@/components/ui/AnimatedText'
 
 const nodes = stackWorkflow.flat()
+
+const stageIcons = [Monitor, Server, ShieldCheck, Database, Rocket]
 
 const stages = [
   { id: 'screen', short: 'Screen', title: 'The screen people use', blurb: 'I start with the UI and never hand off.', ids: ['react'] },
@@ -24,11 +28,11 @@ export function ShipPipeline() {
   return (
     <section ref={ref} style={{ height: sceneHeight(stages.length) }} className="relative">
       <div className={STAGE}>
-        <Container className="w-full">
+        <Container className="relative w-full">
           <p className="text-sm font-semibold uppercase tracking-[0.08em] text-steel">How I ship</p>
-          <h2 className="mt-3 max-w-4xl font-display text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.04]">
+          <AnimatedText as="h2" className="mt-3 max-w-4xl font-display text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.04]">
             From a single screen to <span className="story-gradient">production.</span>
-          </h2>
+          </AnimatedText>
 
           <div className="relative mt-8 sm:mt-12">
             <div className="absolute left-[10%] right-[10%] top-6 h-px bg-line" aria-hidden="true" />
@@ -39,6 +43,7 @@ export function ShipPipeline() {
             />
             <ol className="relative grid grid-cols-5">
               {stages.map((s, index) => {
+                const StageIcon = stageIcons[index]
                 const reached = index <= active
                 const current = index === active
                 return (
@@ -56,7 +61,7 @@ export function ShipPipeline() {
                           current && 'scale-110 shadow-[0_0_30px_rgb(54_183_255_/_0.55)]',
                         )}
                       >
-                        {String(index + 1).padStart(2, '0')}
+                        <StageIcon size={20} aria-hidden="true" />
                       </span>
                       <span className={cn('text-xs font-semibold sm:text-sm', current ? 'text-fg' : 'text-muted')}>
                         {s.short}

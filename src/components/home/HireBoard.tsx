@@ -3,6 +3,7 @@ import { profile } from '@/content/profile'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { Reveal } from '@/components/ui/Reveal'
+import { AnimatedText } from '@/components/ui/AnimatedText'
 
 const channels = [
   { label: 'Email', value: profile.email, href: `mailto:${profile.email}`, icon: Mail },
@@ -32,26 +33,20 @@ export function HireBoard() {
         <Reveal>
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
             <span className="relative">
-              <img
-                src={profile.photo}
-                alt={profile.name}
-                width={160}
-                height={160}
-                loading="lazy"
-                decoding="async"
-                className="size-24 rounded-full border-2 border-line object-cover object-top sm:size-28"
-              />
+              <span className="grid size-24 place-items-center rounded-full bg-gradient-to-br from-[#1368e8] to-[#36b7ff] font-display text-4xl text-white sm:size-28">
+                A
+              </span>
               <span className="live-dot absolute bottom-1 right-1 size-4 rounded-full border-2 border-bg bg-[#34d399]" aria-hidden="true" />
             </span>
             <p className="mt-5 inline-flex items-center gap-2 rounded-full border glass px-3.5 py-1.5 text-xs font-semibold text-muted">
               Open to select full-stack, backend and frontend work
             </p>
-            <h2 className="mt-6 font-display text-[clamp(2.4rem,7vw,5.5rem)] leading-[1.02]">
+            <AnimatedText as="h2" className="mt-6 font-display text-[clamp(2.4rem,7vw,5.5rem)] leading-[1.02]">
               Have a system you want to <span className="story-gradient">build?</span>
-            </h2>
-            <p className="mt-5 max-w-xl text-lg text-muted">
+            </AnimatedText>
+            <AnimatedText as="p" stagger={0.025} delay={0.3} className="mt-5 max-w-xl text-lg text-muted">
               {profile.current.role} at {profile.current.org}. Tell me what it has to do — I’ll reply with a plan.
-            </p>
+            </AnimatedText>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Button to="/contact">
                 Start a conversation

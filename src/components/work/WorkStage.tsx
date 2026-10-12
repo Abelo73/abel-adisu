@@ -6,6 +6,7 @@ import { Container } from '@/components/ui/Container'
 import { STAGE, sceneHeight, useScrollStep } from '@/hooks/useScrollStep'
 import { useReducedMotion } from '@/hooks/useMedia'
 import { cn } from '@/lib/cn'
+import { AnimatedText } from '@/components/ui/AnimatedText'
 
 const shots = [
   { slug: 'art-information-center', src: '/work/art-information-center.webp' },
@@ -30,7 +31,7 @@ export function WorkStage() {
       <div className={STAGE}>
         <Container className="w-full">
         <p className="text-sm font-semibold uppercase tracking-[0.08em] text-steel">Shipped work</p>
-        <h2 className="mt-3 font-display text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.04]">Real systems, <span className="story-gradient">in real use.</span></h2>
+        <AnimatedText as="h2" className="mt-3 font-display text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.04]">Real systems, <span className="story-gradient">in real use.</span></AnimatedText>
 
       <div className="mt-6 grid items-center gap-8 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-12">
         {/* list */}

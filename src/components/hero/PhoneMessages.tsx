@@ -6,7 +6,7 @@ import { useReducedMotion } from '@/hooks/useMedia'
 
 const messages = [
   `Hi, I’m ${profile.shortName} — ${profile.role} at ${profile.employer}, ${profile.locationLabel}.`,
-  'I build Java + Spring Boot backends and the React / Angular screens on top of them.',
+  'I build Java + Spring Boot backends and the screens on top. Right now: a payment gateway in fintech.',
   'Top Rated on Upwork, 100% Job Success. Got something to build?',
 ]
 

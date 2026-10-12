@@ -38,6 +38,12 @@ export const profile = {
     ],
     skills: ['Java', 'Spring Boot', 'React', 'TypeScript', 'PostgreSQL'],
   },
+  /** Journey video on YouTube. Clear `youtubeId` to hide the section. */
+  storyVideo: {
+    youtubeId: 'rbtVgfdt1n4',
+    title: 'Not a straight line — Abel Adisu’s journey',
+    length: '10 min',
+  },
   status: 'LIVE · ATLAS COMPUTER TECHNOLOGY',
   signal: 'ATLAS · PRODUCTION · ADDIS ABABA',
   locationLabel: 'Addis Ababa, Ethiopia',

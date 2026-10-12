@@ -29,7 +29,7 @@ export function SkillsPage() {
             <h2 id={group.id} className="text-2xl font-semibold tracking-tight">
               {group.title}
             </h2>
-            <ul className="mt-4 divide-y divide-line overflow-hidden rounded-[24px] border border-line bg-card">
+            <ul className="mt-4 divide-y divide-line overflow-hidden rounded-[16px] border border-line bg-card">
               {group.items.map((item) => (
                 <li key={item.name} className="flex min-h-12 items-center justify-between gap-4 px-4 py-3">
                   <span>{item.name}</span>

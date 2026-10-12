@@ -27,10 +27,10 @@ export function AboutPage() {
               <li key={chapter.kicker}>
                 <Reveal delay={index * 0.05}>
                   <div className="grid items-end gap-6 md:grid-cols-[8rem_minmax(0,1fr)]">
-                    <p className="font-display text-6xl italic text-muted/35">{String(index + 1).padStart(2, '0')}</p>
+                    <p className="font-display text-6xl text-muted/35">{String(index + 1).padStart(2, '0')}</p>
                     <div>
                       <p className="text-xs uppercase tracking-[0.16em] text-muted">{chapter.kicker}</p>
-                      <h3 className="mt-2 font-display text-3xl italic md:text-4xl">{chapter.title}</h3>
+                      <h3 className="mt-2 font-display text-3xl md:text-4xl">{chapter.title}</h3>
                       <p className="mt-4 max-w-2xl text-muted">{chapter.body}</p>
                     </div>
                   </div>
@@ -54,7 +54,7 @@ export function AboutPage() {
                   <div className="grid gap-4 md:grid-cols-[7rem_minmax(0,1fr)] md:items-stretch">
                     <div className="flex items-center gap-3 md:flex-col md:items-start md:justify-center">
                       <span className="font-mono text-xs text-muted">{String(index + 1).padStart(2, '0')}</span>
-                      <span className="font-display text-3xl italic">{layer.label}</span>
+                      <span className="font-display text-3xl">{layer.label}</span>
                     </div>
                     <GlassCard className="p-6">
                       <h3 className="font-semibold tracking-tight">{layer.title}</h3>
@@ -80,8 +80,8 @@ export function AboutPage() {
             {profile.shipped.map((item, index) => (
               <li key={item.title}>
                 <Reveal delay={index * 0.05}>
-                  <div className="glass rounded-[24px] p-6">
-                    <p className="font-display text-4xl italic text-muted/50">{String(index + 1).padStart(2, '0')}</p>
+                  <div className="glass rounded-[16px] p-6">
+                    <p className="font-display text-4xl text-muted/50">{String(index + 1).padStart(2, '0')}</p>
                     <h3 className="mt-3 text-xl font-semibold tracking-tight">{item.title}</h3>
                     <p className="mt-2 text-sm text-muted">{item.hint}</p>
                   </div>
@@ -106,7 +106,7 @@ export function AboutPage() {
               Full experience
             </Button>
           </Reveal>
-          <div className="overflow-hidden rounded-[28px] border border-line">
+          <div className="overflow-hidden rounded-[16px] border border-line">
             <ParallaxMedia
               src={profile.deskPhoto}
               alt={`${profile.name} at his desk`}
@@ -121,7 +121,7 @@ export function AboutPage() {
             .map((item) => (
               <li key={item.id}>
                 <Reveal>
-                  <div className="glass rounded-[24px] p-5">
+                  <div className="glass rounded-[16px] p-5">
                     <p className="text-xs uppercase tracking-[0.16em] text-muted">
                       {item.period}
                       {item.period.includes('Present') ? (

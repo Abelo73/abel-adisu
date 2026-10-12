@@ -44,7 +44,7 @@ export function GithubRepos() {
   }
 
   return (
-    <ul className="overflow-hidden rounded-[24px] border border-line bg-card">
+    <ul className="overflow-hidden rounded-[16px] border border-line bg-card">
       {result.repos.map((repo) => (
         <li key={repo.url} className="border-b border-line last:border-b-0">
           <a href={repo.url} {...newTab} className="block px-4 py-3 hover:bg-fg/5">

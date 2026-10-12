@@ -45,7 +45,7 @@ export function StoryChapter({
             {chapter.era}
           </motion.p>
           <motion.h2
-            className="mt-3 font-display text-3xl italic leading-tight md:text-5xl"
+            className="mt-3 font-display text-3xl leading-tight md:text-5xl"
             initial={reduced ? false : { opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

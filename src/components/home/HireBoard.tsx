@@ -1,75 +1,95 @@
+import { Download, Github, Linkedin, Mail, Phone } from 'lucide-react'
 import { profile } from '@/content/profile'
 import { Button } from '@/components/ui/Button'
-import { WirePortrait } from '@/components/media/WirePortrait'
+import { Container } from '@/components/ui/Container'
+import { Reveal } from '@/components/ui/Reveal'
+
+const channels = [
+  { label: 'Email', value: profile.email, href: `mailto:${profile.email}`, icon: Mail },
+  { label: 'Phone', value: profile.phoneLabel, href: `tel:${profile.phone}`, icon: Phone },
+  { label: 'LinkedIn', value: 'abeladisunugatu', href: profile.social.linkedin, icon: Linkedin },
+  { label: 'GitHub', value: 'Abelo73', href: profile.social.github, icon: Github },
+]
 
 export function HireBoard() {
   return (
-    <div className="flex flex-col items-center lg:flex-row lg:items-center">
-      <WirePortrait src={profile.photo} alt={profile.name} />
+    <section className="relative flex min-h-[calc(100dvh-4.0625rem)] items-center overflow-hidden py-20">
+      <div
+        className="pointer-events-none absolute left-1/2 top-0 size-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1368e8]/35 blur-[120px]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-50"
+        style={{
+          backgroundImage: 'radial-gradient(rgb(255 255 255 / 0.12) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+          maskImage: 'radial-gradient(ellipse 70% 60% at 50% 55%, #000 20%, transparent 75%)',
+        }}
+        aria-hidden="true"
+      />
 
-      <div className="flex flex-col items-center lg:min-w-[7rem] lg:flex-1 lg:flex-row lg:items-center">
-        <svg
-          className="h-16 w-10 text-fg/45 lg:hidden"
-          viewBox="0 0 40 72"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M20 0v14c0 4-3 6-8 6H10c-5 0-8 3-8 8v16c0 5 3 8 8 8h2c5 0 8 2 8 6v14"
-            stroke="currentColor"
-            strokeWidth="1.1"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-          <circle cx="20" cy="0" r="2.2" fill="currentColor" />
-          <circle cx="20" cy="72" r="2.2" fill="currentColor" />
-        </svg>
-        <svg
-          className="hidden h-24 w-full min-w-[7rem] text-fg/45 lg:block"
-          viewBox="0 0 220 96"
-          preserveAspectRatio="none"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M0 48h36c8 0 12-4 12-12V22c0-8 4-12 12-12h70c8 0 12 4 12 12v26c0 8 4 12 12 12h66"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-          <path
-            d="M36 48h18v28c0 6 4 10 10 10h28"
-            stroke="currentColor"
-            strokeWidth="0.9"
-            strokeLinecap="round"
-            strokeDasharray="2.4 3.2"
-            opacity="0.55"
-          />
-          <circle cx="0" cy="48" r="2.6" fill="currentColor" />
-          <circle cx="82" cy="10" r="2.1" fill="currentColor" />
-          <circle cx="220" cy="48" r="2.6" fill="currentColor" />
-          <rect x="45" y="45" width="6" height="6" rx="0.6" fill="currentColor" />
-        </svg>
-        <p className="shrink-0 text-xs uppercase tracking-[0.22em] text-muted lg:pl-3">Hire</p>
-      </div>
+      <Container className="relative w-full">
+        <Reveal>
+          <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+            <span className="relative">
+              <img
+                src={profile.photo}
+                alt={profile.name}
+                width={160}
+                height={160}
+                loading="lazy"
+                decoding="async"
+                className="size-24 rounded-full border-2 border-line object-cover object-top sm:size-28"
+              />
+              <span className="live-dot absolute bottom-1 right-1 size-4 rounded-full border-2 border-bg bg-[#34d399]" aria-hidden="true" />
+            </span>
+            <p className="mt-5 inline-flex items-center gap-2 rounded-full border glass px-3.5 py-1.5 text-xs font-semibold text-muted">
+              Open to select full-stack, backend and frontend work
+            </p>
+            <h2 className="mt-6 font-display text-[clamp(2.4rem,7vw,5.5rem)] leading-[1.02]">
+              Have a system you want to <span className="story-gradient">build?</span>
+            </h2>
+            <p className="mt-5 max-w-xl text-lg text-muted">
+              {profile.current.role} at {profile.current.org}. Tell me what it has to do — I’ll reply with a plan.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Button to="/contact">
+                Start a conversation
+              </Button>
+              <Button
+                href={profile.cv}
+                variant="secondary"
+              >
+                <Download size={16} aria-hidden="true" />
+                Download CV
+              </Button>
+            </div>
+          </div>
+        </Reveal>
 
-      <div className="mt-4 min-w-0 max-w-xl flex-[1.35] text-center lg:mt-0 lg:pl-6 lg:text-left">
-        <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">Hire for a system, not a ticket</h2>
-        <p className="mt-4 text-muted">
-          {profile.current.role} at {profile.current.org}. Open to select full-stack, backend, and frontend work. CV is
-          the same record as this site.
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
-          <Button to="/contact">Have a system you want to build?</Button>
-          <Button href={profile.cv} variant="secondary">
-            Download CV
-          </Button>
-          <Button to="/services" variant="ghost">
-            Services
-          </Button>
-        </div>
-      </div>
-    </div>
+        <Reveal delay={0.1}>
+          <ul className="mx-auto mt-14 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {channels.map(({ label, value, href, icon: Icon }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="group flex h-full items-center gap-3 rounded-[12px] glass p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#36b7ff]/50"
+                >
+                  <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#1368e8]/25 text-steel transition-colors group-hover:bg-[#1368e8] group-hover:text-white">
+                    <Icon size={18} aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-xs text-muted">{label}</span>
+                    <span className="block truncate text-sm font-semibold">{value}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </Container>
+    </section>
   )
 }

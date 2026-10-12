@@ -24,7 +24,7 @@ export function OriginStoryPage() {
       <Container>
         <header className="relative max-w-3xl pt-14 pb-20 md:pt-24 md:pb-28">
           <p className="text-xs uppercase tracking-[0.22em] text-muted">{originOpening.eyebrow}</p>
-          <h1 className="mt-4 font-display text-[clamp(2.6rem,7vw,5.2rem)] italic leading-[1.02] font-medium">
+          <h1 className="mt-4 font-display text-[clamp(2.6rem,7vw,5.2rem)] leading-[1.02] font-medium">
             {originOpening.title}
           </h1>
           <p className="mt-6 max-w-xl text-lg text-muted">{originOpening.lede}</p>
@@ -41,10 +41,10 @@ export function OriginStoryPage() {
       <section className="relative mt-8 flex min-h-[70vh] items-center justify-center px-5 py-24 text-center">
         <div className="absolute inset-0 bg-fg/[0.03]" aria-hidden="true" />
         <div className="relative max-w-3xl">
-          <p className="font-display text-[clamp(1.8rem,4.5vw,3.2rem)] italic leading-tight">
+          <p className="font-display text-[clamp(1.8rem,4.5vw,3.2rem)] leading-tight">
             {originClose.title}
           </p>
-          <p className="mt-6 font-display text-[clamp(1.4rem,3.2vw,2.2rem)] italic text-muted">
+          <p className="mt-6 font-display text-[clamp(1.4rem,3.2vw,2.2rem)] text-muted">
             {originClose.line}
           </p>
           <div className="mt-12 flex flex-wrap justify-center gap-3">

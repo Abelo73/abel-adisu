@@ -148,7 +148,7 @@ export function ArchitectureGraph({
   )
 
   return (
-    <div className="glass rounded-[24px] p-4 sm:p-6">
+    <div className="glass rounded-[16px] p-4 sm:p-6">
       <div className="flex items-center justify-between gap-3">
         <p id={labelId} className="font-mono text-[0.6875rem] uppercase tracking-[0.08em] text-muted">
           {title}

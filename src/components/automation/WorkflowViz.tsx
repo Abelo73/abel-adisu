@@ -52,7 +52,7 @@ export function WorkflowViz({
   if (!current || !meta) return null
 
   return (
-    <section className="run-desk overflow-hidden rounded-[28px] border border-line">
+    <section className="run-desk overflow-hidden rounded-[16px] border border-line">
       <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-5 py-4 sm:px-6">
         <div>
           <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted">The run</p>
@@ -107,7 +107,7 @@ export function WorkflowViz({
                     className={cn(
                       'relative z-10 grid size-8 shrink-0 place-items-center rounded-full font-mono text-[0.7rem]',
                       selected
-                        ? 'bg-accent text-white'
+                        ? 'bg-accent text-accent-fg'
                         : passed
                           ? 'bg-ok/15 text-ok'
                           : 'bg-fg/8 text-muted',

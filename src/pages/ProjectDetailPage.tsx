@@ -86,7 +86,7 @@ export function ProjectDetailPage() {
         <h2 className="text-2xl font-semibold tracking-tight">Challenges</h2>
         <ul className="mt-4 space-y-4">
           {project.challenges.map((item) => (
-            <li key={item.challenge} className="glass rounded-[24px] p-4">
+            <li key={item.challenge} className="glass rounded-[16px] p-4">
               <p className="font-medium">{item.challenge}</p>
               <p className="mt-2 text-sm text-muted">{item.approach}</p>
             </li>

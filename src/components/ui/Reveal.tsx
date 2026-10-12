@@ -16,10 +16,10 @@ export function Reveal({
   return (
     <motion.div
       className={className}
-      initial={reduced ? false : { opacity: 0, y: 28 }}
+      initial={reduced ? false : { opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-10%' }}
-      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5, delay, ease: [0.2, 0.8, 0.2, 1] }}
     >
       {children}
     </motion.div>
@@ -27,7 +27,7 @@ export function Reveal({
 }
 
 export function GlassCard({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn('glass rounded-[24px] p-6', className)}>{children}</div>
+  return <div className={cn('glass rounded-[16px] p-6', className)}>{children}</div>
 }
 
 export function ParallaxLayer({

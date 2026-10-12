@@ -68,7 +68,7 @@ function HopNote({ hop, index, total }: { hop: Hop; index: number; total: number
           Stop {String(index + 1).padStart(2, '0')} of {String(total).padStart(2, '0')}
         </span>
       </p>
-      <h3 className="mt-3 font-display text-2xl italic leading-tight md:text-3xl">{hop.title}</h3>
+      <h3 className="mt-3 font-display text-2xl leading-tight md:text-3xl">{hop.title}</h3>
       <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted md:text-base">{hop.summary}</p>
       <ul className="mt-4 space-y-2">
         {hop.problems.slice(0, 2).map((item) => (
@@ -155,7 +155,7 @@ export function ServicePath() {
 
   return (
     <div ref={boardRef} className="mt-10">
-      <div className="workflow-board overflow-hidden rounded-[28px]">
+      <div className="workflow-board overflow-hidden rounded-[16px]">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-5 py-4 sm:px-7">
           <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted">
             Stop {String(active + 1).padStart(2, '0')} · {current.short}
@@ -211,7 +211,7 @@ export function ServicePath() {
                         className={cn(
                           'grid size-11 shrink-0 place-items-center rounded-full border bg-card transition-[border-color,background-color,color,box-shadow]',
                           selected
-                            ? 'border-accent bg-accent text-white shadow-[0_0_22px_color-mix(in_srgb,var(--accent)_40%,transparent)]'
+                            ? 'border-accent bg-accent text-accent-fg'
                             : index < active
                               ? 'border-ok/40 text-ok'
                               : 'border-line',
@@ -314,7 +314,7 @@ export function ServicePath() {
                         'relative grid size-12 place-items-center rounded-full border bg-card transition-[opacity,border-color,background-color,color,box-shadow]',
                         reached ? 'opacity-100' : 'opacity-40',
                         selected
-                          ? 'border-accent bg-accent text-white shadow-[0_0_24px_color-mix(in_srgb,var(--accent)_45%,transparent)]'
+                          ? 'border-accent bg-accent text-accent-fg'
                           : index < active
                             ? 'border-ok/40 text-ok'
                             : 'border-line',

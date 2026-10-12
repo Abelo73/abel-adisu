@@ -13,21 +13,21 @@ export function SiteHeader() {
   const palette = useCommandPalette()
 
   return (
-    <header className="sticky top-0 z-40">
-      <Container className="pt-4">
-        <div className="glass flex h-14 items-center justify-between gap-4 rounded-full px-3 sm:px-5">
-          <Link to="/" className="pl-2 text-sm font-semibold tracking-tight">
+    <header className="sticky top-0 z-40 border-b border-line bg-bg/60 backdrop-blur-xl">
+      <Container>
+        <div className="flex h-16 items-center justify-between gap-4">
+          <Link to="/" className="font-display text-lg tracking-tight">
             {profile.shortName}
           </Link>
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary">
             {primaryNav.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
                   cn(
-                    'min-h-10 rounded-full px-3 text-sm text-muted hover:text-fg',
-                    isActive && 'bg-fg/5 text-fg',
+                    'inline-flex min-h-10 items-center rounded-full px-3 text-sm font-medium text-muted transition-colors hover:text-fg',
+                    isActive && 'bg-alt text-fg',
                   )
                 }
               >
@@ -39,7 +39,7 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={() => palette.setOpen(true)}
-              className="hidden min-h-10 cursor-pointer items-center gap-2 rounded-full border border-line px-3 text-xs text-muted md:inline-flex"
+              className="hidden min-h-10 cursor-pointer items-center gap-2 rounded-full border border-line px-3 text-xs text-muted lg:inline-flex"
               aria-label="Open command palette"
             >
               Search
@@ -48,13 +48,13 @@ export function SiteHeader() {
             <ThemeToggle />
             <NavLink
               to={hireNav.to}
-              className="hidden min-h-10 items-center rounded-full bg-accent px-4 text-sm font-medium text-white sm:inline-flex"
+              className="hidden min-h-10 items-center rounded-full bg-fg px-5 text-sm font-semibold text-bg transition-opacity hover:opacity-90 sm:inline-flex"
             >
               {hireNav.label}
             </NavLink>
             <button
               type="button"
-              className="inline-flex min-h-10 min-w-10 cursor-pointer items-center justify-center rounded-full lg:hidden"
+              className="inline-flex min-h-10 min-w-10 cursor-pointer items-center justify-center rounded-full xl:hidden"
               aria-expanded={mobileOpen}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               onClick={() => setMobileOpen((v) => !v)}
@@ -65,8 +65,8 @@ export function SiteHeader() {
         </div>
       </Container>
       {mobileOpen ? (
-        <Container className="pt-3 lg:hidden">
-          <nav className="glass flex flex-col rounded-[24px] px-4 py-3" aria-label="Mobile">
+        <Container className="xl:hidden">
+          <nav className="flex max-h-[calc(100dvh-4.5rem)] flex-col overflow-y-auto border-t border-line pb-3 pt-2" aria-label="Mobile">
             {[...primaryNav, hireNav, { to: '/lab', label: 'Lab' }, { to: '/skills', label: 'Skills' }].map(
               (item) => (
                 <NavLink

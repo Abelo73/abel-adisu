@@ -49,7 +49,7 @@ export function JourneyWalk() {
 
   return (
     <div>
-      <div className="relative overflow-hidden rounded-[28px] border border-line bg-fg/[0.03] px-3 py-4 md:px-6">
+      <div className="relative overflow-hidden rounded-[16px] border border-line bg-fg/[0.03] px-3 py-4 md:px-6">
         <p className="mb-2 flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.18em] text-muted">
           <ThinkingDots reduced={reduced} />
           Thinking through the path
@@ -120,7 +120,7 @@ export function JourneyWalk() {
             <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-accent">
               Thought {String(index + 1).padStart(2, '0')} · {chapter.era}
             </p>
-            <h2 className="mt-3 font-display text-3xl italic leading-tight md:text-5xl">{chapter.title}</h2>
+            <h2 className="mt-3 font-display text-3xl leading-tight md:text-5xl">{chapter.title}</h2>
             <div className="mt-6 space-y-4 text-base leading-relaxed text-muted md:text-lg">
               {chapter.story.map((paragraph, line) => (
                 <motion.p
@@ -143,13 +143,13 @@ export function JourneyWalk() {
             initial={reduced ? false : { opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: reduced ? 0 : 0.35, duration: 0.45 }}
-            className="rounded-[28px] border border-line bg-card p-6 shadow-[var(--shadow-lift)]"
+            className="rounded-[16px] border border-line bg-card p-6 shadow-[var(--shadow-lift)]"
           >
             <p className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.18em] text-muted">
               <ThinkingDots reduced={reduced} />
               A thought for you
             </p>
-            <h3 className="mt-3 font-display text-2xl italic leading-tight">{chapter.teach.label}</h3>
+            <h3 className="mt-3 font-display text-2xl leading-tight">{chapter.teach.label}</h3>
             <p className="mt-3 text-sm leading-relaxed text-muted md:text-base">{chapter.teach.body}</p>
           </motion.div>
           <div className="mt-6 flex flex-wrap gap-3">
@@ -194,7 +194,7 @@ function ThinkingDots({ reduced }: { reduced: boolean }) {
 function renderArtifact(artifact: JourneyArtifact, reduced: boolean) {
   if (artifact.kind === 'quote') {
     return (
-      <blockquote className="border-l-2 border-accent pl-5 font-display text-2xl italic leading-snug md:text-3xl">
+      <blockquote className="border-l-2 border-accent pl-5 font-display text-2xl leading-snug md:text-3xl">
         {artifact.text}
       </blockquote>
     )
@@ -202,9 +202,9 @@ function renderArtifact(artifact: JourneyArtifact, reduced: boolean) {
   if (artifact.kind === 'score') {
     return (
       <div>
-        <p className="font-display text-[clamp(3.5rem,10vw,6rem)] italic leading-none">
+        <p className="font-display text-[clamp(3.5rem,10vw,6rem)] leading-none">
           {artifact.value}
-          <span className="ml-2 text-2xl text-muted not-italic">/ {artifact.of}</span>
+          <span className="ml-2 text-2xl text-muted">/ {artifact.of}</span>
         </p>
         <p className="mt-2 text-sm text-muted">{artifact.note}</p>
       </div>
@@ -279,7 +279,7 @@ function LearningLoop({ steps, reduced }: { steps: string[]; reduced: boolean })
           </li>
         ))}
       </ul>
-      <p className="mt-4 font-display text-2xl italic">
+      <p className="mt-4 font-display text-2xl">
         {steps[active]}
         <span className="text-muted"> → {steps[(active + 1) % steps.length]}</span>
       </p>

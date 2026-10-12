@@ -87,7 +87,7 @@ export function ContactForm() {
           name="message"
           rows={6}
           aria-invalid={Boolean(errors.message)}
-          className="mt-2 w-full rounded-[24px] border border-line bg-card px-4 py-3"
+          className="mt-2 w-full rounded-[16px] border border-line bg-card px-4 py-3"
         />
         {errors.message ? <p className="mt-1 text-sm text-danger">{errors.message}</p> : null}
       </div>

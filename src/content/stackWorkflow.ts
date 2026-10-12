@@ -11,7 +11,7 @@ export const stackWorkflow: StackNode[][] = [
     {
       id: 'react',
       label: 'React + shadcn',
-      accent: '#6d4aff',
+      accent: '#1368e8',
       done: ['Role-based dashboards', 'Vite + shadcn/ui', 'The click that starts the path'],
       open: ['Storybook for the console'],
     },
@@ -27,7 +27,7 @@ export const stackWorkflow: StackNode[][] = [
     {
       id: 'keycloak',
       label: 'Keycloak',
-      accent: '#4c1d95',
+      accent: '#001745',
       done: ['OAuth2 / JWT', 'Roles on the request'],
       open: ['Realm export shown here'],
     },
